@@ -287,6 +287,7 @@
             }
         };
 
+        // This function will be called when the GAPI script loads
         function gapiLoaded() {
             gapi.load('client', initializeGapiClient);
         }
@@ -301,7 +302,8 @@
                 gapiClientReady = true;
                 console.log('GAPI client initialized successfully.');
                 showMessageBox('Google Sheets API ready!', 'success');
-                // Initial page load
+                // Initial page load after GAPI is ready and DOM is loaded
+                // This call is now correctly inside the DOMContentLoaded listener to prevent null errors
                 showPage('summaryPage');
                 await loadFoodAttributes(); // Load food attributes initially for Add Meal page
             } catch (error) {
@@ -357,8 +359,23 @@
             const navButtons = document.querySelectorAll('.nav-link');
             navButtons.forEach(btn => btn.classList.remove('active-nav-link'));
 
-            document.getElementById(pageId).style.display = 'block';
-            document.getElementById(`nav-${pageId.replace('Page', '')}`).classList.add('active-nav-link');
+            // Ensure the element for the page is found before trying to display it
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.style.display = 'block';
+            } else {
+                console.error(`Error: Page section with ID '${pageId}' not found.`);
+                return; // Exit if page not found
+            }
+            
+            // Ensure the nav button is found before trying to add class
+            const navButtonId = `nav-${pageId.replace('Page', '')}`;
+            const targetNavButton = document.getElementById(navButtonId);
+            if (targetNavButton) {
+                targetNavButton.classList.add('active-nav-link');
+            } else {
+                console.error(`Error: Navigation button with ID '${navButtonId}' not found.`);
+            }
 
             // Render specific page content
             if (pageId === 'summaryPage') {
@@ -563,6 +580,8 @@
         function populateFoodItemDropdown() {
             const dropdown = document.getElementById('foodItemName');
             const unitTypeInput = document.getElementById('unitType');
+            if (!dropdown || !unitTypeInput) return; // Add null check for elements
+
             dropdown.innerHTML = '<option value="">Select Food Item</option>'; // Reset dropdown
 
             if (foodAttributesData.length === 0) {
@@ -590,125 +609,150 @@
         }
 
         // Event listener for food item dropdown change
-        document.getElementById('foodItemName').addEventListener('change', (event) => {
-            const selectedFoodName = event.target.value;
-            const unitTypeInput = document.getElementById('unitType');
-            if (selectedFoodName) {
-                const selectedFood = foodAttributesData.find(f => f.FoodItemName === selectedFoodName);
-                if (selectedFood) {
-                    unitTypeInput.value = selectedFood.UnitType_Default;
+        // Add null check for element before adding event listener
+        const foodItemNameDropdown = document.getElementById('foodItemName');
+        if (foodItemNameDropdown) {
+            foodItemNameDropdown.addEventListener('change', (event) => {
+                const selectedFoodName = event.target.value;
+                const unitTypeInput = document.getElementById('unitType');
+                if (selectedFoodName) {
+                    const selectedFood = foodAttributesData.find(f => f.FoodItemName === selectedFoodName);
+                    if (selectedFood) {
+                        unitTypeInput.value = selectedFood.UnitType_Default;
+                    }
+                } else {
+                    unitTypeInput.value = '';
                 }
-            } else {
-                unitTypeInput.value = '';
-            }
-        });
+            });
+        }
 
 
         // Add Meal Form Submission (Simulated)
-        document.getElementById('addMealForm').addEventListener('submit', async (event) => {
-            event.preventDefault();
-            showLoading(true);
+        // Add null check for element before adding event listener
+        const addMealForm = document.getElementById('addMealForm');
+        if (addMealForm) {
+            addMealForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                showLoading(true);
 
-            const mealDate = document.getElementById('mealDate').value;
-            const mealType = document.getElementById('mealType').value;
-            const foodItemName = document.getElementById('foodItemName').value;
-            const quantity = parseFloat(document.getElementById('quantity').value);
-            const unitType = document.getElementById('unitType').value;
+                const mealDate = document.getElementById('mealDate').value;
+                const mealType = document.getElementById('mealType').value;
+                const foodItemName = document.getElementById('foodItemName').value;
+                const quantity = parseFloat(document.getElementById('quantity').value);
+                const unitType = document.getElementById('unitType').value;
 
-            if (!foodItemName || !quantity || isNaN(quantity)) {
-                showMessageBox('Please select a food item and enter a valid quantity.', 'error');
+                if (!foodItemName || !quantity || isNaN(quantity)) {
+                    showMessageBox('Please select a food item and enter a valid quantity.', 'error');
+                    showLoading(false);
+                    return;
+                }
+
+                const foodAttribute = foodAttributesData.find(f => f.FoodItemName === foodItemName);
+                if (!foodAttribute) {
+                    showMessageBox('Selected food item attributes not found. Please register it first.', 'error');
+                    showLoading(false);
+                    return;
+                }
+
+                const kcalCalculated = (foodAttribute.Kcal_per_Unit * quantity).toFixed(2);
+                const proteinCalculated = (foodAttribute.Protein_per_Unit * quantity).toFixed(2);
+                const timestamp = new Date().toISOString();
+                const recordId = `REC-${Date.now()}`; // Simple unique ID
+
+                const newMealRecord = {
+                    RecordID: recordId,
+                    UserID: USER_ID,
+                    Date: mealDate,
+                    MealType: mealType,
+                    FoodItemName: foodItemName,
+                    Quantity: quantity,
+                    UnitType: unitType,
+                    Kcal_Calculated: kcalCalculated,
+                    Protein_Calculated: proteinCalculated,
+                    Timestamp: timestamp
+                };
+
+                console.log('Simulating addition to Food_Records:', newMealRecord);
+                // In a real application, you would send this 'newMealRecord' to your backend.
+                // The backend would then use the Google Sheets API to append a new row to the 'Food_Records' sheet.
+
+                showMessageBox('Meal added successfully! (Simulated. Requires backend for real data persistence.)', 'success');
+                document.getElementById('addMealForm').reset();
+                populateFoodItemDropdown(); // Reset dropdown state
                 showLoading(false);
-                return;
-            }
-
-            const foodAttribute = foodAttributesData.find(f => f.FoodItemName === foodItemName);
-            if (!foodAttribute) {
-                showMessageBox('Selected food item attributes not found. Please register it first.', 'error');
-                showLoading(false);
-                return;
-            }
-
-            const kcalCalculated = (foodAttribute.Kcal_per_Unit * quantity).toFixed(2);
-            const proteinCalculated = (foodAttribute.Protein_per_Unit * quantity).toFixed(2);
-            const timestamp = new Date().toISOString();
-            const recordId = `REC-${Date.now()}`; // Simple unique ID
-
-            const newMealRecord = {
-                RecordID: recordId,
-                UserID: USER_ID,
-                Date: mealDate,
-                MealType: mealType,
-                FoodItemName: foodItemName,
-                Quantity: quantity,
-                UnitType: unitType,
-                Kcal_Calculated: kcalCalculated,
-                Protein_Calculated: proteinCalculated,
-                Timestamp: timestamp
-            };
-
-            console.log('Simulating addition to Food_Records:', newMealRecord);
-            // In a real application, you would send this 'newMealRecord' to your backend.
-            // The backend would then use the Google Sheets API to append a new row to the 'Food_Records' sheet.
-
-            showMessageBox('Meal added successfully! (Simulated. Requires backend for real data persistence.)', 'success');
-            document.getElementById('addMealForm').reset();
-            populateFoodItemDropdown(); // Reset dropdown state
-            showLoading(false);
-        });
+            });
+        }
 
         // Register Food Form Submission (Simulated)
-        document.getElementById('registerFoodForm').addEventListener('submit', async (event) => {
-            event.preventDefault();
-            showLoading(true);
+        // Add null check for element before adding event listener
+        const registerFoodForm = document.getElementById('registerFoodForm');
+        if (registerFoodForm) {
+            registerFoodForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                showLoading(true);
 
-            const newFoodItemName = document.getElementById('newFoodItemName').value;
-            const kcalPerUnit = parseFloat(document.getElementById('kcalPerUnit').value);
-            const proteinPerUnit = parseFloat(document.getElementById('proteinPerUnit').value);
-            const defaultUnitType = document.getElementById('defaultUnitType').value;
-            const source = document.getElementById('source').value;
-            const lastUpdated = new Date().toISOString().split('T')[0];
+                const newFoodItemName = document.getElementById('newFoodItemName').value;
+                const kcalPerUnit = parseFloat(document.getElementById('kcalPerUnit').value);
+                const proteinPerUnit = parseFloat(document.getElementById('proteinPerUnit').value);
+                const defaultUnitType = document.getElementById('defaultUnitType').value;
+                const source = document.getElementById('source').value;
+                const lastUpdated = new Date().toISOString().split('T')[0];
 
-            if (!newFoodItemName || isNaN(kcalPerUnit) || isNaN(proteinPerUnit) || !defaultUnitType) {
-                showMessageBox('Please fill all required fields with valid data.', 'error');
+                if (!newFoodItemName || isNaN(kcalPerUnit) || isNaN(proteinPerUnit) || !defaultUnitType) {
+                    showMessageBox('Please fill all required fields with valid data.', 'error');
+                    showLoading(false);
+                    return;
+                }
+
+                // Check if food item already exists (case-insensitive)
+                if (foodAttributesData.some(f => f.FoodItemName.toLowerCase() === newFoodItemName.toLowerCase())) {
+                    showMessageBox(`Food item "${newFoodItemName}" already exists!`, 'error');
+                    showLoading(false);
+                    return;
+                }
+
+                const newFoodAttribute = {
+                    FoodItemName: newFoodItemName,
+                    Kcal_per_Unit: kcalPerUnit,
+                    Protein_per_Unit: proteinPerUnit,
+                    UnitType_Default: defaultUnitType,
+                    Source: source,
+                    Last_Updated: lastUpdated
+                };
+
+                console.log('Simulating addition to Food_Attributes:', newFoodAttribute);
+                // In a real application, you would send this 'newFoodAttribute' to your backend.
+                // The backend would then use the Google Sheets API to append a new row to the 'Food_Attributes' sheet.
+
+                // Optimistically update local foodAttributesData for immediate UI reflection
+                foodAttributesData.push(newFoodAttribute);
+                foodAttributesData.sort((a, b) => a.FoodItemName.localeCompare(b.FoodItemName)); // Keep sorted
+
+                showMessageBox('Food item registered successfully! (Simulated. Requires backend for real data persistence.)', 'success');
+                document.getElementById('registerFoodForm').reset();
                 showLoading(false);
-                return;
-            }
-
-            // Check if food item already exists (case-insensitive)
-            if (foodAttributesData.some(f => f.FoodItemName.toLowerCase() === newFoodItemName.toLowerCase())) {
-                showMessageBox(`Food item "${newFoodItemName}" already exists!`, 'error');
-                showLoading(false);
-                return;
-            }
-
-            const newFoodAttribute = {
-                FoodItemName: newFoodItemName,
-                Kcal_per_Unit: kcalPerUnit,
-                Protein_per_Unit: proteinPerUnit,
-                UnitType_Default: defaultUnitType,
-                Source: source,
-                Last_Updated: lastUpdated
-            };
-
-            console.log('Simulating addition to Food_Attributes:', newFoodAttribute);
-            // In a real application, you would send this 'newFoodAttribute' to your backend.
-            // The backend would then use the Google Sheets API to append a new row to the 'Food_Attributes' sheet.
-
-            // Optimistically update local foodAttributesData for immediate UI reflection
-            foodAttributesData.push(newFoodAttribute);
-            foodAttributesData.sort((a, b) => a.FoodItemName.localeCompare(b.FoodItemName)); // Keep sorted
-
-            showMessageBox('Food item registered successfully! (Simulated. Requires backend for real data persistence.)', 'success');
-            document.getElementById('registerFoodForm').reset();
-            showLoading(false);
-        });
+            });
+        }
 
         // Initial render logic
-        document.getElementById('fetchSummaryBtn').addEventListener('click', renderSummaryPage);
-        document.getElementById('summaryPeriod').addEventListener('change', renderSummaryPage);
+        // Add null check for element before adding event listener
+        const fetchSummaryBtn = document.getElementById('fetchSummaryBtn');
+        if (fetchSummaryBtn) {
+            fetchSummaryBtn.addEventListener('click', renderSummaryPage);
+        }
+        const summaryPeriod = document.getElementById('summaryPeriod');
+        if (summaryPeriod) {
+            summaryPeriod.addEventListener('change', renderSummaryPage);
+        }
 
-        // Ensure the initial page is shown after GAPI is ready
-        // Handled by `initializeGapiClient` which calls `showPage('summaryPage')`
+        // Ensure the initial page is shown after GAPI is ready AND the DOM is fully loaded.
+        // This ensures all elements are available before any JS tries to access them.
+        document.addEventListener('DOMContentLoaded', () => {
+            // Call gapiLoaded() only after the DOM is fully loaded
+            // The gapi script itself is loaded async/defer, its onload will trigger gapiLoaded()
+            // The crucial part is that initializeGapiClient() now correctly calls showPage()
+            // and loadFoodAttributes() within a context where the DOM is guaranteed to be ready.
+        });
     </script>
 </body>
 </html>
