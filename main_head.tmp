@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kittawat Thongpud — Robotics Engineer | CV Landing</title>
+    <meta name="description" content="Portfolio & CV landing page for Kittawat Thongpud — Robotics & Automation Systems Engineer (ROS2, SLAM, AMR/AGV, AS/RS)." />
+    <meta property="og:title" content="Kittawat Thongpud — Robotics Engineer" />
+    <meta property="og:description" content="ROS2 • SLAM • Computer Vision • AMR/AGV • AS/RS" />
+    <meta property="og:type" content="website" />
+
+    <!-- Root styles and layers -->
+    <link rel="preload" href="index.css" as="style" />
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="styles/landing.css" />
+    <link rel="stylesheet" href="styles/sections.css" />
+
+    <!-- Inter font for landing design -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <nav>
+      <div class="container nav-wrap">
+        <div class="brand"><span class="dot"></span> Kittawat Thongpud</div>
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#experience">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="#awards">Awards</a>
+          <a href="#skills">Skills</a>
+          <a href="#research">Research</a>
+          <a href="#contact">Contact</a>
+          <a class="btn" href="#cv" title="Jump to CV download">CV</a>
+          <a class="btn primary" href="./Kittawat_Thongpud_CV.pdf" download>Download CV</a>
+        </div>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Robotics &amp; Automation — ROS2 • SLAM • AMR/AGV</div>
+          <h1>Engineering autonomy with vision, precision, and grit.</h1>
+          <p class="lead">Technical Advisor (AGV) @ SUN &amp; SIASUN ROBOT (TH). First-class honours (GPA 3.90/4.00), Royal Medal recipient. Hands-on with ROS 2, SLAM, AMR, AS/RS, sensor fusion, and computer vision.</p>
+          <div class="hero-cards">
+            <div class="card kpi">GPA 3.90/4.00 <small>Kasetsart University • #1 in Faculty (2023)</small></div>
+            <div class="card kpi">Royal Medal <small>Engineering Institute of Thailand (2023)</small></div>
+            <div class="card kpi">ROS 2 • SLAM <small>Computer Vision, Sensor Fusion</small></div>
+            <div class="card kpi">AMR / AGV / AS/RS <small>Industrial deployments</small></div>
+          </div>
+          <div style="margin-top:16px" class="chips">
+            <span class="chip">Python</span><span class="chip">C/C++</span><span class="chip">OpenCV</span><span class="chip">PyTorch</span>
+            <span class="chip">Gazebo</span><span class="chip">Linux/Ubuntu</span><span class="chip">PLC</span>
+          </div>
+        </div>
+        <div class="portrait" aria-hidden="true">
+          <div class="glow"></div>
+          <!-- Replace src with your own image -->
+          <img alt="Kittawat portrait placeholder" src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=1470&auto=format&fit=crop" />
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="about" class="section section--about">
+        <div class="container">
+          <div class="section-h">
+            <h2>About</h2>
+            <div class="sub">สรุปย่อ (EN/TH)</div>
+          </div>
+          <p class="muted">Highly motivated robotics engineer with practical experience in autonomous systems, embedded control, and AI-based robotics. Passionate about integrating ML, sensor fusion, and real-world autonomous operations.</p>
+        </div>
+      </section>
+
+      <section id="experience" class="section section--experience">
+        <div class="container">
+          <div class="section-h">
+            <h2>Experience</h2>
+            <a class="btn" href="#cv">See full CV</a>
+          </div>
+          <div class="timeline">
+            <div class="titem">
+              <div class="tbullet" aria-hidden="true"></div>
+              <div class="tpanel">
+                <h3>Technical Advisor, AGV Systems — SUN &amp; SIASUN ROBOT (TH)</h3>
+                <div class="meta">2025 – Present</div>
+                <ul>
+                  <li>Technical leadership for AGV implementations in manufacturing.</li>
+                  <li>Design &amp; optimization of autonomous navigation for industrial environments.</li>
+                  <li>Collaboration with international robotics teams.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="titem">
+              <div class="tbullet"></div>
+              <div class="tpanel">
+                <h3>Team Leader, Robotics &amp; Technical Engineer — SUN &amp; SIASUN ROBOT (TH)</h3>
+                <div class="meta">2023 – 2024</div>
+                <ul>
+                  <li>Led cross-functional teams deploying AGV and AS/RS systems.</li>
+                  <li>ERP-integrated inventory management (Hairobot AS/RS).</li>
+                  <li>Completed intensive training at SIASUN HQ, China.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="titem">
+              <div class="tbullet"></div>
+              <div class="tpanel">
+                <h3>Electrical &amp; Service Engineer (Intern) — IAM Co. Ltd.</h3>
+                <div class="meta">2022</div>
+                <ul>
+                  <li>Programmed welding robots with laser scanner integration (Smartac).</li>
+                  <li>PLC automation for grinding stone stickering machine.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="section section--projects">
+        <div class="container">
+          <div class="section-h">
+            <h2>Selected Projects</h2>
+            <div class="sub">Industrial &amp; Academic</div>
+          </div>
+          <div class="project-gallery">
+            <div class="no-blinking-curser project-card" style="--width: 304px; --height: 365px; --text-font-scale: 1;" draggable="false">
+              <img src="assets/Wow-gif.gif" alt="Animated preview of project" draggable="false">
+              <div class="description">
+                <h3>Automated Material Transferring System</h3>
+                <time>2024 – Present</time>
+                <p>SIASUN AGV forklift deployment for tire production — eliminated manual forklifts; enabled 24/7 ops. <a href="#" draggable="false">Details</a></p>
+              </div>
+              <div class="no-copy skill-list">
+                <div class="item">ROS 2</div>
+                <div class="item">SLAM</div>
+                <div class="item">Sensor Fusion</div>
+              </div>
+              <div class="no-copy card-footer">
+                <a class="link" href="#" title="Website"><img draggable="false" src="icons/globe.svg" alt="Globe icon"> Website</a>
+                <a class="link" href="#" title="GitHub"><img draggable="false" src="icons/github.svg" alt="GitHub icon"> GitHub</a>
+              </div>
+            </div>
+
+            <div class="no-blinking-curser project-card" style="--width: 304px; --height: 365px; --text-font-scale: 1;" draggable="false">
+              <img src="assets/Wow-gif.gif" alt="Animated preview of project" draggable="false">
+              <div class="description">
+                <h3>Automated Tote AS/RS</h3>
+                <time>2023 – 2024</time>
+                <p>Hairobot AGV‑Base AS/RS with ERP integration for real-time inventory management. <a href="#" draggable="false">Details</a></p>
+              </div>
+              <div class="no-copy skill-list">
+                <div class="item">ERP</div>
+                <div class="item">AS/RS</div>
+                <div class="item">AGV</div>
+              </div>
+              <div class="no-copy card-footer">
+                <a class="link" href="#" title="Website"><img draggable="false" src="icons/globe.svg" alt="Globe icon"> Website</a>
+                <a class="link" href="#" title="GitHub"><img draggable="false" src="icons/github.svg" alt="GitHub icon"> GitHub</a>
+              </div>
+            </div>
+
+            <div class="no-blinking-curser project-card" style="--width: 304px; --height: 365px; --text-font-scale: 1;" draggable="false">
+              <img src="assets/Wow-gif.gif" alt="Animated preview of project" draggable="false">
+              <div class="description">
+                <h3>ROS 2 AMR Prototype</h3>
+                <time>2022 – 2023</time>
+                <p>Bachelor’s senior project: precise control + simple navigation packages. <a href="#" draggable="false">Details</a></p>
+              </div>
+              <div class="no-copy skill-list">
+                <div class="item">ROS 2</div>
+                <div class="item">Gazebo</div>
+                <div class="item">OpenCV</div>
+              </div>
+              <div class="no-copy card-footer">
+                <a class="link" href="#" title="Website"><img draggable="false" src="icons/globe.svg" alt="Globe icon"> Website</a>
+                <a class="link" href="#" title="GitHub"><img draggable="false" src="icons/github.svg" alt="GitHub icon"> GitHub</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="awards" class="section">
+        <div class="container">
+          <div class="section-h">
+            <h2>Grants &amp; Awards</h2>
+            <div class="sub">Recognition for excellence</div>
+          </div>
+          <div class="grid">
+            <div class="card"><strong>Royal Medal</strong><br><span class="muted">Engineering Institute of Thailand (2023)</span></div>
+            <div class="card"><strong>Academic Excellence Award</strong><br><span class="muted">Kasetsart University (2023)</span></div>
+            <div class="card"><strong>Smart Agricultural Robot — 2nd Runner‑up</strong><br><span class="muted">Warehouse WMS Category (2021)</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills" class="section">
+        <div class="container">
+          <div class="section-h">
+            <h2>Skills</h2>
+            <div class="sub">Tooling &amp; specialties</div>
+          </div>
+          <div class="grid">
+            <div class="card">
+              <strong>Programming</strong>
+              <div class="chips" style="margin-top:8px">
+                <span class="chip">Python</span><span class="chip">C/C++</span><span class="chip">C#</span><span class="chip">MATLAB</span><span class="chip">JavaScript</span>
+              </div>
+            </div>
+            <div class="card">
+              <strong>Robotics &amp; AI</strong>
+              <div class="chips" style="margin-top:8px">
+                <span class="chip">ROS / ROS 2</span><span class="chip">SLAM</span><span class="chip">Gazebo</span><span class="chip">OpenCV</span><span class="chip">PyTorch</span>
+              </div>
+            </div>
+            <div class="card">
+              <strong>Systems &amp; Hardware</strong>
+              <div class="chips" style="margin-top:8px">
+                <span class="chip">Linux (Ubuntu)</span><span class="chip">Raspberry Pi</span><span class="chip">Arduino</span><span class="chip">ESP32</span><span class="chip">PLC</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="research" class="section">
+        <div class="container">
+          <div class="section-h">
+            <h2>Research Interests</h2>
+            <div class="sub">What I’m exploring</div>
+          </div>
+          <div class="chips">
+            <span class="chip">Autonomous Mobile Robotics</span>
+            <span class="chip">Computer Vision &amp; Sensor Fusion</span>
+            <span class="chip">Machine Learning for Control</span>
+            <span class="chip">Human‑Robot Interaction</span>
+            <span class="chip">SLAM &amp; Localization</span>
+            <span class="chip">Reinforcement Learning</span>
+            <span class="chip">Swarm Robotics</span>
+            <span class="chip">Smart Manufacturing</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="cv" class="section">
+        <div class="container">

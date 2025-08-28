@@ -1,0 +1,52 @@
+/* Widgets layer: reusable, style-adjustable components */
+@layer widgets {
+  /* Theme variables for widgets; override per container if needed */
+  :root, .widget-theme {
+    --w-radius: 16px;
+    --w-border: var(--line);
+    --w-chip-bg: color-mix(in oklab, var(--brand) 10%, transparent);
+    --w-chip-color: #d9e6f5;
+    --w-chip-ring: var(--ring);
+    --w-btn-bg: linear-gradient(180deg,#101620,#0b111a);
+    --w-btn-color: var(--text);
+    --w-btn-border: var(--line);
+  }
+
+  /* Pretty pill chips */
+  .w-chip, .modal__skills .item {
+    display:inline-flex;align-items:center;gap:8px;
+    padding:10px 14px; border-radius:999px;
+    background: var(--w-chip-bg);
+    color: var(--w-chip-color);
+    border: 1px solid var(--w-border);
+    box-shadow: 0 0 0 6px color-mix(in oklab, var(--w-chip-ring) 70%, transparent);
+    font-weight: 700;
+    letter-spacing:.2px;
+  }
+  .modal__skills { display:flex; gap:12px; flex-wrap:wrap; }
+
+  /* Beautiful action buttons */
+  .w-btn, .modal__links .link {
+    display:inline-flex;align-items:center;gap:10px;
+    padding:12px 14px;
+    border-radius:12px;
+    background: var(--w-btn-bg);
+    color: var(--w-btn-color);
+    border: 1px solid var(--w-btn-border);
+    box-shadow: 0 6px 18px rgba(0,0,0,.18);
+    text-decoration:none;
+    cursor:pointer;
+    transition: transform var(--dur, 200ms) var(--ease, ease), border-color var(--dur, 200ms) var(--ease, ease);
+  }
+  .w-btn:hover, .modal__links .link:hover { transform: translateY(-1px); border-color:#2a3a4e; }
+  .w-btn img, .modal__links .link img { width:16px; height:16px; display:block; filter:contrast(1.15); }
+
+  /* Optional inner card look for modal content */
+  .modal__content.cardlike { 
+    background: linear-gradient(180deg,#0f141b,#0c1219);
+    border: 1px solid var(--w-border);
+    border-radius: var(--w-radius);
+    padding: 14px;
+  }
+}
+

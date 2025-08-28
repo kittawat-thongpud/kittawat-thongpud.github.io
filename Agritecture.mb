@@ -1,0 +1,30 @@
+# Architecture
+
+This landing page uses layered CSS and small progressive JS.
+
+- Layers: `reset`, `tokens`, `base`, `main`, `css`, `utilities` in `index.css`.
+- Global theme tokens live in `:root` (colors, spacing, type). The landing adds extra tokens in `styles/landing.css`.
+- Layout and components for nav/hero/sections are defined in `@layer main` of `styles/landing.css`.
+- Per-section visual tweaks live in `styles/sections.css` under `@layer css`.
+- IntersectionObserver in `scripts/main.js` toggles `.in-view` on `.section` for scroll fade.
+- Project modal: a no-dependency overlay dialog with gallery (`#project-modal`), fed by per-card `<template class="project-detail">` or card content fallback.
+  - Visuals: modal dialog reuses the project card surface (gradient, border, radius) for consistent styling.
+
+Files
+
+- `index.html` redirects to `main.html` and loads root styles.
+- `main.html` is the landing (nav, hero, sections). Each `<section>` has class `section` for fade.
+- Sections are modularized as HTML fragments under `sections/` and composed at runtime via `scripts/sections.js` using `data/sections.json`.
+- `index.css` defines cascade layer order and shared system styles.
+- `styles/landing.css` implements the provided landing design with layers.
+- `styles/sections.css` holds section-specific overrides (accent colors, shadows, etc.).
+- `styles/landing.css` also includes a reusable `.project-card` component and `.project-gallery` grid for project showcases.
+  - Includes modal styles: `.modal`, `.modal__dialog`, `.gallery__track`, and controls.
+- `templates/` includes HTML skeletons for sections (optional usage).
+ - `scripts/widgets.js` renders project cards and opens the modal from `data/projects.json` with an adjustable widget theme.
+- `styles/widgets.css` defines the widgets layer (chips/buttons/theme hooks) that the modal and dynamic cards use.
+
+Notes
+
+- Google Fonts (Inter) are linked in `main.html` head.
+- Reduced motion preference is respected; animations are disabled when set.

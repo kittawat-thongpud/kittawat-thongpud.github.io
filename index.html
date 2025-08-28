@@ -1,667 +1,97 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Kittawat Thongpud — Robotics Engineer | CV Landing</title>
-    <meta
-      name="description"
-      content="Portfolio & CV landing page for Kittawat Thongpud — Robotics & Automation Systems Engineer (ROS2, SLAM, AMR/AGV, AS/RS)."
-    />
-    <meta property="og:title" content="Kittawat Thongpud — Robotics Engineer" />
-    <meta
-      property="og:description"
-      content="ROS2 • SLAM • Computer Vision • AMR/AGV • AS/RS"
-    />
-    <meta property="og:type" content="website" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      @layer base, components, nav, hero, sections, timeline, grid, footer;
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kittawat Thongpud — Robotics Engineer | CV Landing</title>
+  <meta name="description" content="Portfolio & CV landing page for Kittawat Thongpud — Robotics & Automation Systems Engineer (ROS2, SLAM, AMR/AGV, AS/RS)." />
+  <meta property="og:title" content="Kittawat Thongpud — Robotics Engineer" />
+  <meta property="og:description" content="ROS2 • SLAM • Computer Vision • AMR/AGV • AS/RS" />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/index.css" />
+  <link rel="stylesheet" href="/styles/landing.css" />
+  <link rel="stylesheet" href="/styles/widgets.css" />
+  <link rel="stylesheet" href="/styles/sections.css" />
+</head>
+<body>
+  <nav>
+    <div class="container nav-wrap">
+      <div class="brand"><span class="dot"></span> Kittawat Thongpud</div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#awards">Awards</a>
+        <a href="#skills">Skills</a>
+        <a href="#research">Research</a>
+        <a href="#contact">Contact</a>
+        <a class="btn" href="#cv" title="Jump to CV download">CV</a>
+        <a class="btn primary" href="/Kittawat_Thongpud_CV.pdf" download>Download CV</a>
+      </div>
+    </div>
+  </nav>
 
-      @layer base {
-        :root {
-          --bg: #0b0f14;
-          --panel: #0f141b;
-          --muted: #8aa0b5;
-          --text: #e9f0f7;
-          --brand: #4fd1c5;
-          --accent: #7aa2f7;
-          --line: #1b2430;
-          --chip: #121a24;
-          --chip-b: #203040;
-          --ring: rgba(79, 209, 197, 0.25);
-        }
-        * {
-          box-sizing: border-box;
-        }
-        html {
-          scroll-behavior: smooth;
-        }
-        body {
-          margin: 0;
-          font-family:
-            Inter,
-            system-ui,
-            Segoe UI,
-            Roboto,
-            Ubuntu,
-            Arial,
-            sans-serif;
-          background:
-            radial-gradient(
-              1200px 600px at 20% -10%,
-              #0f2030 0%,
-              rgba(11, 15, 20, 0) 65%
-            ),
-            radial-gradient(
-              1200px 600px at 120% 10%,
-              #101a28 0%,
-              rgba(11, 15, 20, 0) 55%
-            ),
-            var(--bg);
-          color: var(--text);
-        }
-        a {
-          color: inherit;
-          text-decoration: none;
-        }
-        .container {
-          width: min(1150px, 92vw);
-          margin-inline: auto;
-        }
-      }
-
-      @layer components {
-        .btn {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          border: 1px solid var(--line);
-          background: linear-gradient(180deg, #101620, #0b111a);
-          color: var(--text);
-          padding: 10px 14px;
-          border-radius: 12px;
-        }
-        .btn:hover {
-          border-color: #2a3a4e;
-        }
-        .btn.primary {
-          background: linear-gradient(135deg, var(--brand), var(--accent));
-          color: #0a0f14;
-          border: none;
-          box-shadow: 0 0 0 6px var(--ring);
-        }
-        .card {
-          background: linear-gradient(180deg, #0f141b, #0c1219);
-          border: 1px solid var(--line);
-          border-radius: 16px;
-          padding: 16px;
-        }
-        .kpi {
-          font-weight: 800;
-          font-size: 1.25rem;
-        }
-        .kpi small {
-          display: block;
-          color: var(--muted);
-          font-weight: 600;
-          margin-top: 4px;
-        }
-        .chips {
-          display: flex;
-          gap: 8px;
-          flex-wrap: wrap;
-        }
-        .chip {
-          background: linear-gradient(180deg, #0e1620, #0a1118);
-          border: 1px solid var(--line);
-          padding: 6px 10px;
-          border-radius: 999px;
-          font-weight: 600;
-          color: #cfe2f3;
-        }
-        .portrait {
-          aspect-ratio: 4/3;
-          border-radius: 18px;
-          border: 1px solid var(--line);
-          background: linear-gradient(135deg, #0c121a, #121b26);
-          position: relative;
-          overflow: hidden;
-        }
-        .portrait .glow {
-          position: absolute;
-          inset: 0;
-          background:
-            radial-gradient(
-              400px 200px at 70% 30%,
-              rgba(79, 209, 197, 0.25),
-              transparent 60%
-            ),
-            radial-gradient(
-              500px 260px at 10% 80%,
-              rgba(122, 162, 247, 0.2),
-              transparent 60%
-            );
-        }
-        .portrait img {
-          position: absolute;
-          inset: auto 0 0;
-          opacity: 0.9;
-          width: 100%;
-          object-fit: cover;
-          filter: contrast(1.05);
-        }
-      }
-
-      @layer nav {
-        nav {
-          position: sticky;
-          top: 0;
-          z-index: 60;
-          backdrop-filter: saturate(180%) blur(12px);
-          background: linear-gradient(
-            180deg,
-            rgba(11, 15, 20, 0.85),
-            rgba(11, 15, 20, 0.55)
-          );
-          border-bottom: 1px solid var(--line);
-        }
-        .nav-wrap {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 14px 0;
-        }
-        .brand {
-          display: flex;
-          gap: 0.6rem;
-          align-items: center;
-          font-weight: 800;
-          letter-spacing: 0.3px;
-        }
-        .brand .dot {
-          width: 10px;
-          height: 10px;
-          border-radius: 999px;
-          background: linear-gradient(135deg, var(--brand), var(--accent));
-          box-shadow: 0 0 0 6px var(--ring);
-        }
-        .nav-links {
-          display: flex;
-          gap: 18px;
-          align-items: center;
-          font-weight: 600;
-        }
-      }
-
-      @layer hero {
-        .hero {
-          padding: 64px 0 28px;
-        }
-        .hero-grid {
-          display: grid;
-          grid-template-columns: 1.15fr 0.85fr;
-          gap: 28px;
-          align-items: center;
-        }
-        .eyebrow {
-          font-weight: 700;
-          color: var(--brand);
-          letter-spacing: 0.24em;
-          text-transform: uppercase;
-          font-size: 0.8rem;
-        }
-        h1 {
-          font-size: clamp(1.8rem, 3.4vw, 3rem);
-          line-height: 1.1;
-          margin: 0.6rem 0 1rem;
-        }
-        .lead {
-          color: #c7d6e6;
-          font-size: 1.05rem;
-        }
-        .hero-cards {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 14px;
-          margin-top: 22px;
-        }
-      }
-
-      @layer sections {
-        section {
-          padding: 44px 0;
-          border-top: 1px solid var(--line);
-        }
-        .section-h {
-          display: flex;
-          justify-content: space-between;
-          align-items: last baseline;
-          margin-bottom: 18px;
-        }
-        .section-h h2 {
-          font-size: 1.35rem;
-        }
-        .sub {
-          color: var(--muted);
-        }
-      }
-
-      @layer timeline {
-        .timeline {
-          position: relative;
-        }
-        .timeline:before {
-          content: "";
-          position: absolute;
-          left: 10px;
-          top: 0;
-          bottom: 0;
-          width: 2px;
-          background: linear-gradient(#2a3a4e, #1b2430);
-        }
-        .titem {
-          display: grid;
-          grid-template-columns: 24px 1fr;
-          gap: 14px;
-          padding: 12px 0;
-        }
-        .tbullet {
-          width: 22px;
-          height: 22px;
-          border-radius: 999px;
-          background: linear-gradient(135deg, var(--brand), var(--accent));
-          box-shadow: 0 0 0 6px var(--ring);
-        }
-        .tpanel {
-          background: linear-gradient(180deg, #0f141b, #0b1118);
-          border: 1px solid var(--line);
-          border-radius: 12px;
-          padding: 14px;
-        }
-        .tpanel h3 {
-          margin: 0.2rem 0 0.2rem;
-          font-size: 1rem;
-        }
-        .tpanel .meta {
-          color: var(--muted);
-          font-weight: 600;
-          font-size: 0.95rem;
-        }
-        .tpanel ul {
-          margin: 0.35rem 0 0.2rem 1.1rem;
-        }
-      }
-
-      @layer grid {
-        .grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 14px;
-        }
-        @media (max-width: 960px) {
-          .hero-grid {
-            grid-template-columns: 1fr;
-          }
-          .grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
-        }
-        @media (max-width: 640px) {
-          .grid {
-            grid-template-columns: 1fr;
-          }
-          .nav-links {
-            display: none;
-          }
-        }
-      }
-
-      @layer footer {
-        footer {
-          padding: 28px 0;
-          color: var(--muted);
-        }
-        .muted {
-          color: var(--muted);
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <nav>
-      <div class="container nav-wrap">
-        <div class="brand"><span class="dot"></span> Kittawat Thongpud</div>
-        <div class="nav-links">
-          <a href="#about">About</a>
-          <a href="#experience">Experience</a>
-          <a href="#projects">Projects</a>
-          <a href="#awards">Awards</a>
-          <a href="#skills">Skills</a>
-          <a href="#research">Research</a>
-          <a href="#contact">Contact</a>
-          <a class="btn" href="#cv" title="Jump to CV download">CV</a>
-          <a class="btn primary" href="./Kittawat_Thongpud_CV.pdf" download
-            >Download CV</a
-          >
+  <header class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">Robotics & Automation — ROS2 • SLAM • AMR/AGV</div>
+        <h1>Engineering autonomy with vision, precision, and grit.</h1>
+        <p class="lead">Technical Advisor (AGV) @ SUN & SIASUN ROBOT (TH). First-class honours (GPA 3.90/4.00), Royal Medal recipient. Hands-on with ROS 2, SLAM, AMR, AS/RS, sensor fusion, and computer vision.</p>
+        <div class="hero-cards">
+          <div class="card kpi">GPA 3.90/4.00 <small>Kasetsart University • #1 in Faculty (2023)</small></div>
+          <div class="card kpi">Royal Medal <small>Engineering Institute of Thailand (2023)</small></div>
+          <div class="card kpi">ROS 2 • SLAM <small>Computer Vision, Sensor Fusion</small></div>
+          <div class="card kpi">AMR / AGV / AS/RS <small>Industrial deployments</small></div>
+        </div>
+        <div style="margin-top:16px" class="chips">
+          <span class="chip">Python</span><span class="chip">C/C++</span><span class="chip">OpenCV</span><span class="chip">PyTorch</span>
+          <span class="chip">Gazebo</span><span class="chip">Linux/Ubuntu</span><span class="chip">PLC</span>
         </div>
       </div>
-    </nav>
+      <div class="portrait" aria-hidden="true">
+        <div class="glow"></div>
+        <img alt="Kittawat portrait placeholder" src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=1470&auto=format&fit=crop" />
+      </div>
+    </div>
+  </header>
 
-    <header class="hero">
-      <div class="container hero-grid">
-        <div>
-          <div class="eyebrow">
-            Robotics & Automation — ROS2 • SLAM • AMR/AGV
+  <main id="app-main" data-sections-src="/data/sections.json"></main>
+
+  <footer>
+    <div class="container">
+      © <span id="y"></span> Kittawat Thongpud — Robotics & Automation. Built with Vite + TypeScript.
+    </div>
+  </footer>
+
+  <div id="project-modal" class="modal" hidden aria-hidden="true">
+    <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
+      <div class="modal__header">
+        <h3 id="project-modal-title">Project</h3>
+        <button class="modal__close" type="button" aria-label="Close">×</button>
+      </div>
+      <div class="modal__body">
+        <div class="modal__gallery">
+          <div class="gallery__viewport">
+            <div class="gallery__track"></div>
           </div>
-          <h1>Engineering autonomy with vision, precision, and grit.</h1>
-          <p class="lead">
-            Technical Advisor (AGV) @ SUN & SIASUN ROBOT (TH). First-class
-            honours (GPA 3.90/4.00), Royal Medal recipient. Hands-on with ROS 2,
-            SLAM, AMR, AS/RS, sensor fusion, and computer vision.
-          </p>
-          <div class="hero-cards">
-            <div class="card kpi">
-              GPA 3.90/4.00
-              <small>Kasetsart University • #1 in Faculty (2023)</small>
-            </div>
-            <div class="card kpi">
-              Royal Medal
-              <small>Engineering Institute of Thailand (2023)</small>
-            </div>
-            <div class="card kpi">
-              ROS 2 • SLAM <small>Computer Vision, Sensor Fusion</small>
-            </div>
-            <div class="card kpi">
-              AMR / AGV / AS/RS <small>Industrial deployments</small>
-            </div>
-          </div>
-          <div style="margin-top: 16px" class="chips">
-            <span class="chip">Python</span><span class="chip">C/C++</span
-            ><span class="chip">OpenCV</span><span class="chip">PyTorch</span>
-            <span class="chip">Gazebo</span
-            ><span class="chip">Linux/Ubuntu</span><span class="chip">PLC</span>
+          <div class="gallery__nav">
+            <button class="gallery__btn gallery__prev" type="button" aria-label="Previous">‹</button>
+            <button class="gallery__btn gallery__next" type="button" aria-label="Next">›</button>
           </div>
         </div>
-        <div class="portrait" aria-hidden="true">
-          <div class="glow"></div>
-          <!-- Replace src with your own image -->
-          <img
-            alt="Kittawat portrait placeholder"
-            src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=1470&auto=format&fit=crop"
-          />
+        <div class="modal__content cardlike">
+          <time class="modal__time"></time>
+          <p class="modal__desc"></p>
+          <div class="modal__skills skill-list"></div>
+          <div class="modal__links card-footer"></div>
         </div>
       </div>
-    </header>
+    </div>
+  </div>
 
-    <main>
-      <section id="about">
-        <div class="container">
-          <div class="section-h">
-            <h2>About</h2>
-            <div class="sub">สรุปย่อ (EN/TH)</div>
-          </div>
-          <p class="muted">
-            Highly motivated robotics engineer with practical experience in
-            autonomous systems, embedded control, and AI-based robotics.
-            Passionate about integrating ML, sensor fusion, and real-world
-            autonomous operations.
-          </p>
-        </div>
-      </section>
-
-      <section id="experience">
-        <div class="container">
-          <div class="section-h">
-            <h2>Experience</h2>
-            <a class="btn" href="#cv">See full CV</a>
-          </div>
-          <div class="timeline">
-            <div class="titem">
-              <div class="tbullet" aria-hidden="true"></div>
-              <div class="tpanel">
-                <h3>
-                  Technical Advisor, AGV Systems — SUN &amp; SIASUN ROBOT (TH)
-                </h3>
-                <div class="meta">2025 – Present</div>
-                <ul>
-                  <li>
-                    Technical leadership for AGV implementations in
-                    manufacturing.
-                  </li>
-                  <li>
-                    Design & optimization of autonomous navigation for
-                    industrial environments.
-                  </li>
-                  <li>Collaboration with international robotics teams.</li>
-                </ul>
-              </div>
-            </div>
-            <div class="titem">
-              <div class="tbullet"></div>
-              <div class="tpanel">
-                <h3>
-                  Team Leader, Robotics & Technical Engineer — SUN &amp; SIASUN
-                  ROBOT (TH)
-                </h3>
-                <div class="meta">2023 – 2024</div>
-                <ul>
-                  <li>
-                    Led cross-functional teams deploying AGV and AS/RS systems.
-                  </li>
-                  <li>ERP-integrated inventory management (Hairobot AS/RS).</li>
-                  <li>Completed intensive training at SIASUN HQ, China.</li>
-                </ul>
-              </div>
-            </div>
-            <div class="titem">
-              <div class="tbullet"></div>
-              <div class="tpanel">
-                <h3>Electrical & Service Engineer (Intern) — IAM Co. Ltd.</h3>
-                <div class="meta">2022</div>
-                <ul>
-                  <li>
-                    Programmed welding robots with laser scanner integration
-                    (Smartac).
-                  </li>
-                  <li>PLC automation for grinding stone stickering machine.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="projects">
-        <div class="container">
-          <div class="section-h">
-            <h2>Selected Projects</h2>
-            <div class="sub">Industrial & Academic</div>
-          </div>
-          <div class="grid">
-            <article class="card">
-              <h3>Automated Material Transferring System</h3>
-              <p class="muted">
-                SIASUN AGV forklift deployment for tire production — eliminated
-                manual forklifts; enabled 24/7 ops.
-              </p>
-            </article>
-            <article class="card">
-              <h3>Automated Tote AS/RS</h3>
-              <p class="muted">
-                Hairobot AGV‑Base AS/RS with ERP integration for real-time
-                inventory management.
-              </p>
-            </article>
-            <article class="card">
-              <h3>ROS 2 AMR Prototype</h3>
-              <p class="muted">
-                Bachelor’s senior project: precise control + simple navigation
-                packages.
-              </p>
-            </article>
-            <article class="card">
-              <h3>6‑DoF Marker Tracking</h3>
-              <p class="muted">
-                IEEE RAS SPARX: IMU–ArUco fusion for high‑rate HRI tracking.
-              </p>
-            </article>
-            <article class="card">
-              <h3>ROS 2 Aubo Cobot Controller</h3>
-              <p class="muted">
-                Direct position control via TCP/IP→CANBUS bridge package.
-              </p>
-            </article>
-            <article class="card">
-              <h3>Thermal–RGB Calibration</h3>
-              <p class="muted">
-                Homography-based alignment of low‑cost thermal with Pi camera.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="awards">
-        <div class="container">
-          <div class="section-h">
-            <h2>Grants & Awards</h2>
-            <div class="sub">Recognition for excellence</div>
-          </div>
-          <div class="grid">
-            <div class="card">
-              <strong>Royal Medal</strong><br /><span class="muted"
-                >Engineering Institute of Thailand (2023)</span
-              >
-            </div>
-            <div class="card">
-              <strong>Academic Excellence Award</strong><br /><span
-                class="muted"
-                >Kasetsart University (2023)</span
-              >
-            </div>
-            <div class="card">
-              <strong>Smart Agricultural Robot — 2nd Runner‑up</strong
-              ><br /><span class="muted">Warehouse WMS Category (2021)</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="skills">
-        <div class="container">
-          <div class="section-h">
-            <h2>Skills</h2>
-            <div class="sub">Tooling & specialties</div>
-          </div>
-          <div class="grid">
-            <div class="card">
-              <strong>Programming</strong>
-              <div class="chips" style="margin-top: 8px">
-                <span class="chip">Python</span><span class="chip">C/C++</span
-                ><span class="chip">C#</span><span class="chip">MATLAB</span
-                ><span class="chip">JavaScript</span>
-              </div>
-            </div>
-            <div class="card">
-              <strong>Robotics & AI</strong>
-              <div class="chips" style="margin-top: 8px">
-                <span class="chip">ROS / ROS 2</span
-                ><span class="chip">SLAM</span><span class="chip">Gazebo</span
-                ><span class="chip">OpenCV</span
-                ><span class="chip">PyTorch</span>
-              </div>
-            </div>
-            <div class="card">
-              <strong>Systems & Hardware</strong>
-              <div class="chips" style="margin-top: 8px">
-                <span class="chip">Linux (Ubuntu)</span
-                ><span class="chip">Raspberry Pi</span
-                ><span class="chip">Arduino</span><span class="chip">ESP32</span
-                ><span class="chip">PLC</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="research">
-        <div class="container">
-          <div class="section-h">
-            <h2>Research Interests</h2>
-            <div class="sub">What I’m exploring</div>
-          </div>
-          <div class="chips">
-            <span class="chip">Autonomous Mobile Robotics</span>
-            <span class="chip">Computer Vision & Sensor Fusion</span>
-            <span class="chip">Machine Learning for Control</span>
-            <span class="chip">Human‑Robot Interaction</span>
-            <span class="chip">SLAM & Localization</span>
-            <span class="chip">Reinforcement Learning</span>
-            <span class="chip">Swarm Robotics</span>
-            <span class="chip">Smart Manufacturing</span>
-          </div>
-        </div>
-      </section>
-
-      <section id="cv">
-        <div class="container">
-          <div class="section-h">
-            <h2>CV</h2>
-            <a class="btn primary" href="./Kittawat_Thongpud_CV.pdf" download
-              >Download PDF</a
-            >
-          </div>
-          <p class="muted">
-            For recruiters: download a concise PDF version. The landing page
-            distills highlights; the PDF includes full details.
-          </p>
-        </div>
-      </section>
-
-      <section id="contact">
-        <div class="container">
-          <div class="section-h">
-            <h2>Contact</h2>
-            <div class="sub">Let’s build the future</div>
-          </div>
-          <div class="grid">
-            <div class="card">
-              <strong>Email</strong><br /><a
-                href="mailto:Thongpud.k@gmail.com"
-                class="muted"
-                >Thongpud.k@gmail.com</a
-              >
-            </div>
-            <div class="card">
-              <strong>Phone</strong><br /><span class="muted"
-                >(+66) 86‑390‑3152</span
-              >
-            </div>
-            <div class="card">
-              <strong>Location</strong><br /><span class="muted"
-                >Sriracha, Chonburi, TH</span
-              >
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <div class="container">
-        © <span id="y"></span> Kittawat Thongpud — Robotics & Automation. Built
-        with vanilla HTML/CSS.
-      </div>
-    </footer>
-
-    <script>
-      document.getElementById("y").textContent = new Date().getFullYear();
-    </script>
-  </body>
+  <script type="module" src="/src/main.ts"></script>
+</body>
 </html>
