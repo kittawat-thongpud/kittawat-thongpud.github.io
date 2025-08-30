@@ -1,758 +1,100 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+﻿<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meal Tracking Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* slate-50 */
-        }
-        .nav-link {
-            transition: color 0.3s, border-color 0.3s;
-        }
-        .active-nav-link {
-            color: #0d9488; /* teal-600 */
-            border-bottom-color: #0d9488;
-        }
-        .page-section {
-            display: none; /* Hidden by default */
-        }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 400px;
-            max-height: 50vh;
-            margin-top: 2rem;
-            margin-bottom: 2rem;
-            padding: 1rem;
-            background-color: white;
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            font-size: 1.5rem;
-            color: #0d9488;
-            flex-direction: column;
-        }
-        .loading-spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #0d9488;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin-bottom: 1rem;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kittawat Thongpud - Robotics Engineer | CV Landing</title>
+  <meta name="description" content="Portfolio & CV landing page for Kittawat Thongpud - Robotics & Automation Systems Engineer (ROS2, SLAM, AMR/AGV, AS/RS)." />
+  <meta property="og:title" content="Kittawat Thongpud - Robotics Engineer" />
+  <meta property="og:description" content="ROS2  SLAM  Computer Vision  AMR/AGV  AS/RS" />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/index.css" />
+  <link rel="stylesheet" href="/styles/landing.css" />
+  <link rel="stylesheet" href="/styles/widgets.css" />
+  <link rel="stylesheet" href="/styles/sections.css" />
 </head>
-<body class="text-slate-700">
-
-    <div id="loading-overlay" class="loading-overlay hidden">
-        <div class="loading-spinner"></div>
-        <span>Loading data...</span>
+<body class="theme-main">
+  <nav>
+    <div class="container nav-wrap">
+      <div class="brand"><span class="dot"></span> Kittawat Thongpud</div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#awards">Awards</a>
+        <a href="#skills">Skills</a>
+        <a href="#research">Research</a>
+        <a href="#contact">Contact</a>
+        <a class="btn" href="#cv" title="Jump to CV download">CV</a>
+        <a class="btn primary" href="/Kittawat_Thongpud_CV.pdf" download>Download CV</a>
+      </div>
     </div>
+  </nav>
 
-    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
-        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center">
-                    <span class="font-bold text-xl text-teal-700">MealTrack</span>
-                </div>
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-4">
-                        <button onclick="showPage('summaryPage')" id="nav-summary" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-teal-600 border-b-2 border-transparent">Summarize Meals</button>
-                        <button onclick="showPage('addMealPage')" id="nav-add-meal" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-teal-600 border-b-2 border-transparent">Add Meal</button>
-                        <button onclick="showPage('registerFoodPage')" id="nav-register-food" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-teal-600 border-b-2 border-transparent">Register Food</button>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <!-- Message Box -->
-        <div id="messageBox" class="hidden fixed top-20 right-5 bg-teal-100 border border-teal-400 text-teal-700 px-4 py-3 rounded-lg shadow-md z-50 transition-transform transform translate-x-full" role="alert">
-            <p id="messageText"></p>
+  <header class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">Robotics & Automation - ROS2  SLAM  AMR/AGV</div>
+        <h1>Engineering autonomy with vision, precision, and grit.</h1>
+        <p class="lead">Technical Advisor (AGV) @ SUN & SIASUN ROBOT (TH). First-class honours (GPA 3.90/4.00), Royal Medal recipient. Hands-on with ROS 2, SLAM, AMR, AS/RS, sensor fusion, and computer vision.</p>
+        <div class="hero-cards">
+          <div class="card kpi">GPA 3.90/4.00 <small>Kasetsart University  #1 in Faculty (2023)</small></div>
+          <div class="card kpi">Royal Medal <small>Engineering Institute of Thailand (2023)</small></div>
+          <div class="card kpi">ROS 2  SLAM <small>Computer Vision, Sensor Fusion</small></div>
+          <div class="card kpi">AMR / AGV / AS/RS <small>Industrial deployments</small></div>
         </div>
-
-        <!-- Summarize Meal Page -->
-        <section id="summaryPage" class="page-section py-8">
-            <h2 class="text-3xl font-bold text-slate-800 mb-6 text-center">Daily Meal Summary</h2>
-            <p class="text-center max-w-2xl mx-auto text-slate-600 mb-8">This page provides an overview of your daily Kcal and Protein intake. Select a time range to view aggregated summaries and detailed meal logs.</p>
-
-            <div class="flex flex-wrap justify-center gap-4 mb-8">
-                <select id="summaryPeriod" class="p-2 border rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500">
-                    <option value="last7days">Last 7 Days</option>
-                    <option value="last30days">Last 30 Days</option>
-                    <option value="thisMonth">This Month</option>
-                    <option value="thisYear">This Year</option>
-                    <option value="allTime">All Time</option>
-                </select>
-                <button id="fetchSummaryBtn" class="bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300">
-                    Refresh Summary
-                </button>
-            </div>
-
-            <div class="chart-container">
-                <canvas id="summaryChart"></canvas>
-            </div>
-
-            <h3 class="text-2xl font-bold text-slate-800 mt-12 mb-4 text-center">Detailed Daily Breakdown</h3>
-            <p class="text-center max-w-2xl mx-auto text-slate-600 mb-8">Below are the aggregated Kcal and Protein totals for each day within the selected period.</p>
-            <div id="dailySummariesList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Daily summaries will be rendered here -->
-            </div>
-             <h3 class="text-2xl font-bold text-slate-800 mt-12 mb-4 text-center">Raw Meal Records</h3>
-             <p class="text-center max-w-2xl mx-auto text-slate-600 mb-8">Here are all individual meal records fetched from the Google Sheet for the selected period.</p>
-            <div id="rawMealRecords" class="overflow-x-auto bg-white rounded-xl shadow-lg p-6">
-                 <table class="min-w-full divide-y divide-slate-200">
-                    <thead class="bg-slate-50">
-                        <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Date</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Meal Type</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Food Item</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Quantity</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Kcal</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Protein (g)</th>
-                        </tr>
-                    </thead>
-                    <tbody id="mealRecordsTableBody" class="bg-white divide-y divide-slate-200">
-                        <!-- Meal records will be loaded here -->
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- Add Meal Page -->
-        <section id="addMealPage" class="page-section py-8">
-            <h2 class="text-3xl font-bold text-slate-800 mb-6 text-center">Add New Meal Entry</h2>
-            <p class="text-center max-w-2xl mx-auto text-slate-600 mb-8">Log your consumed meals here. Select existing food items or add new ones via the "Register Food" page. Kcal and Protein will be calculated based on the quantity and registered food attributes.</p>
-            
-            <div class="bg-white rounded-xl shadow-lg p-8 max-w-2xl mx-auto">
-                <form id="addMealForm" class="space-y-6">
-                    <div>
-                        <label for="mealDate" class="block text-sm font-medium text-slate-700">Date</label>
-                        <input type="date" id="mealDate" class="mt-1 block w-full p-2 border border-slate-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500" required>
-                    </div>
-                    <div>
-                        <label for="mealType" class="block text-sm font-medium text-slate-700">Meal Type</label>
-                        <select id="mealType" class="mt-1 block w-full p-2 border border-slate-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500" required>
-                            <option value="">Select Meal Type</option>
-                            <option value="Breakfast">Breakfast</option>
-                            <option value="Lunch">Lunch</option>
-                            <option value="Dinner">Dinner</option>
-                            <option value="Snack">Snack</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="foodItemName" class="block text-sm font-medium text-slate-700">Food Item Name</label>
-                        <select id="foodItemName" class="mt-1 block w-full p-2 border border-slate-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500" required>
-                             <option value="">Loading food items...</option>
-                        </select>
-                    </div>
-                     <div>
-                        <label for="quantity" class="block text-sm font-medium text-slate-700">Quantity</label>
-                        <input type="number" id="quantity" step="0.01" class="mt-1 block w-full p-2 border border-slate-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500" required>
-                    </div>
-                    <div>
-                        <label for="unitType" class="block text-sm font-medium text-slate-700">Unit Type</label>
-                        <input type="text" id="unitType" class="mt-1 block w-full p-2 border border-slate-300 rounded-md shadow-sm bg-slate-100" readonly>
-                    </div>
-                    <div class="flex justify-end">
-                        <button type="submit" class="bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-6 rounded-md shadow-md transition duration-300">
-                            Add Meal
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </section>
-
-        <!-- Register Food Page -->
-        <section id="registerFoodPage" class="page-section py-8">
-            <h2 class="text-3xl font-bold text-slate-800 mb-6 text-center">Register New Food Item</h2>
-            <p class="text-center max-w-2xl mx-auto text-slate-600 mb-8">Add new food items to your personal database. This data will be used to automatically calculate Kcal and Protein when you log meals.</p>
-
-            <div class="bg-white rounded-xl shadow-lg p-8 max-w-2xl mx-auto">
-                <form id="registerFoodForm" class="space-y-6">
-                    <div>
-                        <label for="newFoodItemName" class="block text-sm font-medium text-slate-700">Food Item Name</label>
-                        <input type="text" id="newFoodItemName" class="mt-1 block w-full p-2 border border-slate-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500" required>
-                    </div>
-                    <div>
-                        <label for="kcalPerUnit" class="block text-sm font-medium text-slate-700">Kcal per Unit</label>
-                        <input type="number" id="kcalPerUnit" step="0.01" class="mt-1 block w-full p-2 border border-slate-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500" required>
-                    </div>
-                    <div>
-                        <label for="proteinPerUnit" class="block text-sm font-medium text-slate-700">Protein per Unit (g)</label>
-                        <input type="number" id="proteinPerUnit" step="0.01" class="mt-1 block w-full p-2 border border-slate-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500" required>
-                    </div>
-                    <div>
-                        <label for="defaultUnitType" class="block text-sm font-medium text-slate-700">Default Unit Type (e.g., 100g, piece)</label>
-                        <input type="text" id="defaultUnitType" class="mt-1 block w-full p-2 border border-slate-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500" placeholder="e.g., 100g" required>
-                    </div>
-                    <div>
-                        <label for="source" class="block text-sm font-medium text-slate-700">Source (e.g., USDA, Custom)</label>
-                        <input type="text" id="source" class="mt-1 block w-full p-2 border border-slate-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500" placeholder="e.g., Custom" required>
-                    </div>
-                    <div class="flex justify-end">
-                        <button type="submit" class="bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-6 rounded-md shadow-md transition duration-300">
-                            Register Food
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </section>
-    </main>
-
-    <footer class="bg-slate-800 text-white">
-        <div class="container mx-auto py-8 px-4 sm:px-6 lg:px-8 text-center">
-            <p>Meal Tracking App powered by Google Sheets API.</p>
-            <p class="text-sm text-slate-400 mt-2">Developed for personal meal tracking.</p>
+        <div style="margin-top:16px" class="chips">
+          <span class="chip">Python</span><span class="chip">C/C++</span><span class="chip">OpenCV</span><span class="chip">PyTorch</span>
+          <span class="chip">Gazebo</span><span class="chip">Linux/Ubuntu</span><span class="chip">PLC</span>
         </div>
-    </footer>
+      </div>
+      <div class="portrait" aria-hidden="true">
+        <div class="glow"></div>
+        <img alt="Kittawat portrait placeholder" src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=1470&auto=format&fit=crop" />
+      </div>
+    </div>
+  </header>
 
-    <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
-    <script>
-        // IMPORTANT: Replace with your actual Google Sheets API Key
-        // Get this from Google Cloud Console -> APIs & Services -> Credentials
-        // Ensure Google Sheets API is enabled for your project.
-        const API_KEY = 'AIzaSyCsDuhLUw8t6F7DfqxFnq3N5oO4n5Ugjw8';
-        const SPREADSHEET_ID = '1mqHdKTHLc8tFam4C-XgXKk6Bd56Nn-Le6VIv-cPcev8';
-        const USER_ID = 'user123'; // Static user ID for this single-user app
+  <main id="app-main" data-sections-src="/data/sections.json"></main>
 
-        let gapiClientReady = false;
-        let foodAttributesData = []; // To store food attributes for lookup
+  <footer>
+    <div class="container">
+      c <span id="y"></span> Kittawat Thongpud - Robotics & Automation. Built with Vite + TypeScript.
+    </div>
+  </footer>
 
-        // Chart instance
-        let summaryChartInstance = null;
+  <div id="project-modal" class="modal" hidden aria-hidden="true">
+    <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
+      <div class="modal__header">
+        <div class="modal__header-left">
+          <h3 id="project-modal-title">Project</h3>
+          <time class="modal__time"></time>
+        </div>
+        <button class="modal__close" type="button" aria-label="Close">x</button>
+      </div>
+      <div class="modal__body">
+        <div class="modal__gallery">
+          <div class="gallery__viewport">
+            <div class="gallery__track"></div>
+          </div>
+          <div class="gallery__nav">
+            <button class="gallery__btn gallery__prev" type="button" aria-label="Previous">&lt;</button>
+            <button class="gallery__btn gallery__next" type="button" aria-label="Next">&gt;</button>
+          </div>
+        </div>
+        <div class="modal__content cardlike">
+          <p class="modal__desc"></p>
+        </div>
+        <div class="modal__meta modal__meta-bottom">
+          <div class="modal__skills skill-list"></div>
+          <div class="modal__links links-inline"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        const showMessageBox = (message, type = 'success') => {
-            const msgBox = document.getElementById('messageBox');
-            const msgText = document.getElementById('messageText');
-            msgText.textContent = message;
-
-            // Reset classes
-            msgBox.classList.remove('bg-red-100', 'border-red-400', 'text-red-700', 'bg-teal-100', 'border-teal-400', 'text-teal-700');
-            msgBox.classList.add('transition-transform', 'transform', 'translate-x-full'); // Ensure it starts hidden
-
-            if (type === 'success') {
-                msgBox.classList.add('bg-teal-100', 'border-teal-400', 'text-teal-700');
-            } else if (type === 'error') {
-                msgBox.classList.add('bg-red-100', 'border-red-400', 'text-red-700');
-            }
-
-            msgBox.classList.remove('hidden');
-            setTimeout(() => {
-                msgBox.classList.remove('translate-x-full');
-            }, 50); // Small delay to allow transition
-
-            setTimeout(() => {
-                msgBox.classList.add('translate-x-full');
-                msgBox.addEventListener('transitionend', () => {
-                    msgBox.classList.add('hidden');
-                }, { once: true });
-            }, 5000); // Hide after 5 seconds
-        };
-
-        const showLoading = (show) => {
-            const loadingOverlay = document.getElementById('loading-overlay');
-            if (show) {
-                loadingOverlay.classList.remove('hidden');
-            } else {
-                loadingOverlay.classList.add('hidden');
-            }
-        };
-
-        // This function will be called when the GAPI script loads
-        function gapiLoaded() {
-            gapi.load('client', initializeGapiClient);
-        }
-
-        async function initializeGapiClient() {
-            showLoading(true);
-            try {
-                await gapi.client.init({
-                    apiKey: API_KEY,
-                    discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
-                });
-                gapiClientReady = true;
-                console.log('GAPI client initialized successfully.');
-                showMessageBox('Google Sheets API ready!', 'success');
-                // Initial page load after GAPI is ready and DOM is loaded
-                // This call is now correctly inside the DOMContentLoaded listener to prevent null errors
-                showPage('summaryPage');
-                await loadFoodAttributes(); // Load food attributes initially for Add Meal page
-            } catch (error) {
-                console.error('Error initializing GAPI client:', error);
-                showMessageBox('Error loading Google Sheets API. Check your API key and network connection.', 'error');
-            } finally {
-                showLoading(false);
-            }
-        }
-
-        async function loadSheetData(sheetName) {
-            if (!gapiClientReady) {
-                showMessageBox('Google Sheets API not ready. Please wait.', 'error');
-                return null;
-            }
-            try {
-                const response = await gapi.client.sheets.spreadsheets.values.get({
-                    spreadsheetId: SPREADSHEET_ID,
-                    range: `${sheetName}!A:Z`, // Fetch all data from sheet
-                });
-                // Assuming first row is header
-                const headers = response.result.values ? response.result.values[0] : [];
-                const rows = response.result.values ? response.result.values.slice(1) : [];
-                
-                return rows.map(row => {
-                    let obj = {};
-                    headers.forEach((header, index) => {
-                        obj[header] = row[index] || ''; // Assign value or empty string if undefined
-                    });
-                    return obj;
-                });
-            } catch (error) {
-                console.error(`Error loading data from ${sheetName}:`, error);
-                showMessageBox(`Error loading data from ${sheetName}. Check sheet name or permissions.`, 'error');
-                return null;
-            }
-        }
-
-        async function loadFoodAttributes() {
-            showLoading(true);
-            const data = await loadSheetData('Food_Attributes');
-            if (data) {
-                foodAttributesData = data;
-                populateFoodItemDropdown();
-            }
-            showLoading(false);
-        }
-
-        function showPage(pageId) {
-            const pages = document.querySelectorAll('.page-section');
-            pages.forEach(page => page.style.display = 'none'); // Hide all pages
-
-            const navButtons = document.querySelectorAll('.nav-link');
-            navButtons.forEach(btn => btn.classList.remove('active-nav-link'));
-
-            // Ensure the element for the page is found before trying to display it
-            const targetPage = document.getElementById(pageId);
-            if (targetPage) {
-                targetPage.style.display = 'block';
-            } else {
-                console.error(`Error: Page section with ID '${pageId}' not found.`);
-                return; // Exit if page not found
-            }
-            
-            // Ensure the nav button is found before trying to add class
-            const navButtonId = `nav-${pageId.replace('Page', '')}`;
-            const targetNavButton = document.getElementById(navButtonId);
-            if (targetNavButton) {
-                targetNavButton.classList.add('active-nav-link');
-            } else {
-                console.error(`Error: Navigation button with ID '${navButtonId}' not found.`);
-            }
-
-            // Render specific page content
-            if (pageId === 'summaryPage') {
-                renderSummaryPage();
-            } else if (pageId === 'addMealPage') {
-                populateFoodItemDropdown();
-                const today = new Date().toISOString().split('T')[0];
-                document.getElementById('mealDate').value = today;
-            } else if (pageId === 'registerFoodPage') {
-                // No specific rendering needed for this page on show
-            }
-        }
-
-        async function renderSummaryPage() {
-            showLoading(true);
-            const period = document.getElementById('summaryPeriod').value;
-            const records = await loadSheetData('Food_Records');
-            const dailySummaries = await loadSheetData('Daily_Summary');
-
-            if (!records || !dailySummaries) {
-                showLoading(false);
-                return;
-            }
-
-            const endDate = new Date();
-            let startDate;
-
-            switch (period) {
-                case 'last7days':
-                    startDate = new Date();
-                    startDate.setDate(endDate.getDate() - 6);
-                    break;
-                case 'last30days':
-                    startDate = new Date();
-                    startDate.setDate(endDate.getDate() - 29);
-                    break;
-                case 'thisMonth':
-                    startDate = new Date(endDate.getFullYear(), endDate.getMonth(), 1);
-                    break;
-                case 'thisYear':
-                    startDate = new Date(endDate.getFullYear(), 0, 1);
-                    break;
-                case 'allTime':
-                default:
-                    startDate = new Date(0); // Unix Epoch
-                    break;
-            }
-
-            const filteredDailySummaries = dailySummaries.filter(summary => {
-                const summaryDate = new Date(summary.SummaryDate);
-                return summaryDate >= startDate && summaryDate <= endDate;
-            }).sort((a, b) => new Date(a.SummaryDate) - new Date(b.SummaryDate));
-
-
-            const filteredRecords = records.filter(record => {
-                const recordDate = new Date(record.Date);
-                return recordDate >= startDate && recordDate <= endDate;
-            }).sort((a, b) => new Date(a.Date) - new Date(b.Date));
-
-
-            renderDailySummaryList(filteredDailySummaries);
-            renderSummaryChart(filteredDailySummaries);
-            renderMealRecordsTable(filteredRecords);
-            showLoading(false);
-        }
-
-        function renderDailySummaryList(summaries) {
-            const listDiv = document.getElementById('dailySummariesList');
-            listDiv.innerHTML = ''; // Clear previous content
-
-            if (summaries.length === 0) {
-                listDiv.innerHTML = '<p class="text-center text-slate-500 col-span-full">No daily summaries found for the selected period.</p>';
-                return;
-            }
-
-            summaries.forEach(summary => {
-                const summaryCard = document.createElement('div');
-                summaryCard.className = 'bg-white rounded-xl shadow-md p-6';
-                summaryCard.innerHTML = `
-                    <h4 class="text-xl font-semibold text-slate-900">${summary.SummaryDate}</h4>
-                    <p class="mt-2 text-slate-600">Total Kcal: <span class="font-bold text-teal-600">${parseFloat(summary.Total_Kcal).toFixed(2)}</span></p>
-                    <p class="text-slate-600">Total Protein: <span class="font-bold text-teal-600">${parseFloat(summary.Total_Protein).toFixed(2)} g</span></p>
-                    <p class="text-slate-600">Meals Logged: ${summary.Meal_Count}</p>
-                `;
-                listDiv.appendChild(summaryCard);
-            });
-        }
-
-        function renderMealRecordsTable(records) {
-            const tableBody = document.getElementById('mealRecordsTableBody');
-            tableBody.innerHTML = ''; // Clear previous content
-
-            if (records.length === 0) {
-                tableBody.innerHTML = `<tr><td colspan="6" class="px-6 py-4 text-center text-slate-500">No meal records found for the selected period.</td></tr>`;
-                return;
-            }
-
-            records.forEach(record => {
-                const row = tableBody.insertRow();
-                row.className = 'hover:bg-slate-50';
-                row.innerHTML = `
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">${record.Date}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">${record.MealType}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">${record.FoodItemName}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">${record.Quantity} ${record.UnitType}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">${parseFloat(record.Kcal_Calculated).toFixed(2)}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">${parseFloat(record.Protein_Calculated).toFixed(2)}</td>
-                `;
-            });
-        }
-
-        function renderSummaryChart(summaries) {
-            const ctx = document.getElementById('summaryChart').getContext('2d');
-
-            if (summaryChartInstance) {
-                summaryChartInstance.destroy(); // Destroy previous chart instance
-            }
-
-            const labels = summaries.map(s => s.SummaryDate);
-            const kcalData = summaries.map(s => parseFloat(s.Total_Kcal));
-            const proteinData = summaries.map(s => parseFloat(s.Total_Protein));
-
-            summaryChartInstance = new Chart(ctx, {
-                type: 'bar', // Can be 'line' or 'bar'
-                data: {
-                    labels: labels,
-                    datasets: [
-                        {
-                            label: 'Total Kcal',
-                            data: kcalData,
-                            backgroundColor: 'rgba(20, 184, 166, 0.7)', // teal-500
-                            borderColor: 'rgba(13, 148, 136, 1)',
-                            borderWidth: 1,
-                            yAxisID: 'y'
-                        },
-                        {
-                            label: 'Total Protein (g)',
-                            data: proteinData,
-                            backgroundColor: 'rgba(56, 189, 248, 0.7)', // sky-400
-                            borderColor: 'rgba(14, 165, 233, 1)',
-                            borderWidth: 1,
-                            yAxisID: 'y1'
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                        },
-                        title: {
-                            display: true,
-                            text: 'Daily Kcal and Protein Summary'
-                        }
-                    },
-                    scales: {
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Date'
-                            },
-                            ticks: {
-                                callback: function(value, index, values) {
-                                    const date = new Date(labels[index]);
-                                    // Format as MM/DD, wrap if needed
-                                    const formatted = `${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')}`;
-                                    return formatted.length > 10 ? formatted.match(/.{1,10}/g) : formatted;
-                                }
-                            }
-                        },
-                        y: {
-                            type: 'linear',
-                            display: true,
-                            position: 'left',
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Kcal'
-                            }
-                        },
-                        y1: {
-                            type: 'linear',
-                            display: true,
-                            position: 'right',
-                            beginAtZero: true,
-                            grid: {
-                                drawOnChartArea: false, // only draw grid lines for one axis
-                            },
-                            title: {
-                                display: true,
-                                text: 'Protein (g)'
-                            }
-                        }
-                    }
-                }
-            });
-        }
-
-
-        function populateFoodItemDropdown() {
-            const dropdown = document.getElementById('foodItemName');
-            const unitTypeInput = document.getElementById('unitType');
-            if (!dropdown || !unitTypeInput) return; // Add null check for elements
-
-            dropdown.innerHTML = '<option value="">Select Food Item</option>'; // Reset dropdown
-
-            if (foodAttributesData.length === 0) {
-                dropdown.innerHTML = '<option value="">No food items registered. Register some!</option>';
-                unitTypeInput.value = '';
-                return;
-            }
-
-            foodAttributesData.forEach(food => {
-                const option = document.createElement('option');
-                option.value = food.FoodItemName;
-                option.textContent = food.FoodItemName;
-                dropdown.appendChild(option);
-            });
-
-            // Set initial unit type if a food is pre-selected or default
-            if (dropdown.value) {
-                const selectedFood = foodAttributesData.find(f => f.FoodItemName === dropdown.value);
-                if (selectedFood) {
-                    unitTypeInput.value = selectedFood.UnitType_Default;
-                }
-            } else {
-                unitTypeInput.value = ''; // Clear if no selection
-            }
-        }
-
-        // Event listener for food item dropdown change
-        // Add null check for element before adding event listener
-        const foodItemNameDropdown = document.getElementById('foodItemName');
-        if (foodItemNameDropdown) {
-            foodItemNameDropdown.addEventListener('change', (event) => {
-                const selectedFoodName = event.target.value;
-                const unitTypeInput = document.getElementById('unitType');
-                if (selectedFoodName) {
-                    const selectedFood = foodAttributesData.find(f => f.FoodItemName === selectedFoodName);
-                    if (selectedFood) {
-                        unitTypeInput.value = selectedFood.UnitType_Default;
-                    }
-                } else {
-                    unitTypeInput.value = '';
-                }
-            });
-        }
-
-
-        // Add Meal Form Submission (Simulated)
-        // Add null check for element before adding event listener
-        const addMealForm = document.getElementById('addMealForm');
-        if (addMealForm) {
-            addMealForm.addEventListener('submit', async (event) => {
-                event.preventDefault();
-                showLoading(true);
-
-                const mealDate = document.getElementById('mealDate').value;
-                const mealType = document.getElementById('mealType').value;
-                const foodItemName = document.getElementById('foodItemName').value;
-                const quantity = parseFloat(document.getElementById('quantity').value);
-                const unitType = document.getElementById('unitType').value;
-
-                if (!foodItemName || !quantity || isNaN(quantity)) {
-                    showMessageBox('Please select a food item and enter a valid quantity.', 'error');
-                    showLoading(false);
-                    return;
-                }
-
-                const foodAttribute = foodAttributesData.find(f => f.FoodItemName === foodItemName);
-                if (!foodAttribute) {
-                    showMessageBox('Selected food item attributes not found. Please register it first.', 'error');
-                    showLoading(false);
-                    return;
-                }
-
-                const kcalCalculated = (foodAttribute.Kcal_per_Unit * quantity).toFixed(2);
-                const proteinCalculated = (foodAttribute.Protein_per_Unit * quantity).toFixed(2);
-                const timestamp = new Date().toISOString();
-                const recordId = `REC-${Date.now()}`; // Simple unique ID
-
-                const newMealRecord = {
-                    RecordID: recordId,
-                    UserID: USER_ID,
-                    Date: mealDate,
-                    MealType: mealType,
-                    FoodItemName: foodItemName,
-                    Quantity: quantity,
-                    UnitType: unitType,
-                    Kcal_Calculated: kcalCalculated,
-                    Protein_Calculated: proteinCalculated,
-                    Timestamp: timestamp
-                };
-
-                console.log('Simulating addition to Food_Records:', newMealRecord);
-                // In a real application, you would send this 'newMealRecord' to your backend.
-                // The backend would then use the Google Sheets API to append a new row to the 'Food_Records' sheet.
-
-                showMessageBox('Meal added successfully! (Simulated. Requires backend for real data persistence.)', 'success');
-                document.getElementById('addMealForm').reset();
-                populateFoodItemDropdown(); // Reset dropdown state
-                showLoading(false);
-            });
-        }
-
-        // Register Food Form Submission (Simulated)
-        // Add null check for element before adding event listener
-        const registerFoodForm = document.getElementById('registerFoodForm');
-        if (registerFoodForm) {
-            registerFoodForm.addEventListener('submit', async (event) => {
-                event.preventDefault();
-                showLoading(true);
-
-                const newFoodItemName = document.getElementById('newFoodItemName').value;
-                const kcalPerUnit = parseFloat(document.getElementById('kcalPerUnit').value);
-                const proteinPerUnit = parseFloat(document.getElementById('proteinPerUnit').value);
-                const defaultUnitType = document.getElementById('defaultUnitType').value;
-                const source = document.getElementById('source').value;
-                const lastUpdated = new Date().toISOString().split('T')[0];
-
-                if (!newFoodItemName || isNaN(kcalPerUnit) || isNaN(proteinPerUnit) || !defaultUnitType) {
-                    showMessageBox('Please fill all required fields with valid data.', 'error');
-                    showLoading(false);
-                    return;
-                }
-
-                // Check if food item already exists (case-insensitive)
-                if (foodAttributesData.some(f => f.FoodItemName.toLowerCase() === newFoodItemName.toLowerCase())) {
-                    showMessageBox(`Food item "${newFoodItemName}" already exists!`, 'error');
-                    showLoading(false);
-                    return;
-                }
-
-                const newFoodAttribute = {
-                    FoodItemName: newFoodItemName,
-                    Kcal_per_Unit: kcalPerUnit,
-                    Protein_per_Unit: proteinPerUnit,
-                    UnitType_Default: defaultUnitType,
-                    Source: source,
-                    Last_Updated: lastUpdated
-                };
-
-                console.log('Simulating addition to Food_Attributes:', newFoodAttribute);
-                // In a real application, you would send this 'newFoodAttribute' to your backend.
-                // The backend would then use the Google Sheets API to append a new row to the 'Food_Attributes' sheet.
-
-                // Optimistically update local foodAttributesData for immediate UI reflection
-                foodAttributesData.push(newFoodAttribute);
-                foodAttributesData.sort((a, b) => a.FoodItemName.localeCompare(b.FoodItemName)); // Keep sorted
-
-                showMessageBox('Food item registered successfully! (Simulated. Requires backend for real data persistence.)', 'success');
-                document.getElementById('registerFoodForm').reset();
-                showLoading(false);
-            });
-        }
-
-        // Initial render logic
-        // Add null check for element before adding event listener
-        const fetchSummaryBtn = document.getElementById('fetchSummaryBtn');
-        if (fetchSummaryBtn) {
-            fetchSummaryBtn.addEventListener('click', renderSummaryPage);
-        }
-        const summaryPeriod = document.getElementById('summaryPeriod');
-        if (summaryPeriod) {
-            summaryPeriod.addEventListener('change', renderSummaryPage);
-        }
-
-        // Ensure the initial page is shown after GAPI is ready AND the DOM is fully loaded.
-        // This ensures all elements are available before any JS tries to access them.
-        document.addEventListener('DOMContentLoaded', () => {
-            // Call gapiLoaded() only after the DOM is fully loaded
-            // The gapi script itself is loaded async/defer, its onload will trigger gapiLoaded()
-            // The crucial part is that initializeGapiClient() now correctly calls showPage()
-            // and loadFoodAttributes() within a context where the DOM is guaranteed to be ready.
-        });
-    </script>
-</body>
+  <script type="module" src="/src/main.ts"></script></body>
 </html>

@@ -1,0 +1,10 @@
+[
+  { "id": "about",      "template": "templates/section-about.html" },
+  { "id": "experience", "template": "templates/section-experience.html" },
+  { "id": "projects",   "template": "templates/section-projects.html" },
+  { "id": "awards",     "src": "sections/awards.html" },
+  { "id": "skills",     "src": "sections/skills.html" },
+  { "id": "research",   "src": "sections/research.html" },
+  { "id": "cv",         "src": "sections/cv.html" },
+  { "id": "contact",    "template": "templates/section-contact.html" }
+]

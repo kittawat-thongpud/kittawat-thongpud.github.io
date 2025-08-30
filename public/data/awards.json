@@ -1,0 +1,40 @@
+[
+  {
+    "id": "royal-medal-2023",
+    "title": "Royal Medal",
+    "time": "2023",
+    "summary": "Engineering Institute of Thailand Royal Medal recipient.",
+    "description": "Awarded the Royal Medal from the Engineering Institute of Thailand for outstanding academic and engineering contributions.",
+    "images": [
+      { "src": "assets/Wow-gif.gif", "alt": "Royal Medal certificate", "caption": "Ceremony and certificate presentation." }
+    ],
+    "skills": ["Award"],
+    "tags": ["award"]
+  },
+  {
+    "id": "ku-academic-excellence-2023",
+    "title": "Academic Excellence Award",
+    "time": "2023",
+    "summary": "Kasetsart University Academic Excellence Award.",
+    "description": "Recognized by Kasetsart University for top academic performance and contributions to robotics research.",
+    "images": [
+      { "src": "assets/Wow-gif.gif", "alt": "Academic Excellence medal", "caption": "University award event highlight." }
+    ],
+    "skills": ["Academic"],
+    "tags": ["award"]
+  },
+  {
+    "id": "smart-agri-robot-runner-up-2021",
+    "title": "Smart Agricultural Robot - 2nd Runner-up",
+    "time": "2021",
+    "summary": "Warehouse WMS Category competition prize.",
+    "description": "Placed as 2nd runner-up in the Smart Agricultural Robot competition (Warehouse WMS Category).",
+    "images": [
+      { "src": "assets/Wow-gif.gif", "alt": "Competition robot", "caption": "Prototype demonstration during competition." },
+      { "src": "assets/Wow-gif.gif", "alt": "WMS flow", "caption": "Explaining warehouse WMS task sequence." }
+    ],
+    "skills": ["Competition", "Robotics"],
+    "tags": ["award"]
+  }
+]
+
