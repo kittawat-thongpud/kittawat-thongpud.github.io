@@ -13,6 +13,19 @@
     --chip-b:#203040; 
     --ring:rgba(79,209,197,.25);
   }
+  /* Light theme overrides */
+  .theme-light{
+    --bg:#f6f8fb;
+    --panel:#ffffff;
+    --muted:#5f6676;
+    --text:#0e0f12;
+    --brand:#2b6cb0;
+    --accent:#0ea5e9;
+    --line:#e5e7eb;
+    --chip:#f1f5f9;
+    --chip-b:#e2e8f0;
+    --ring:rgba(43,108,176,.25);
+  }
 }
 
 @layer base {
@@ -33,6 +46,8 @@
 
   /* NAV */
   nav{position:sticky;top:0;z-index:60;backdrop-filter:saturate(180%) blur(12px);background:linear-gradient(180deg, rgba(11,15,20,.85), rgba(11,15,20,.55));border-bottom:1px solid var(--line)}
+  nav{transition: transform var(--dur, 280ms) var(--ease, cubic-bezier(.22,.61,.36,1));}
+  nav.nav--hidden{transform: translateY(-100%);}
   .nav-wrap{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
   .brand{display:flex;gap:.6rem;align-items:center;font-weight:800;letter-spacing:.3px}
   .brand .dot{width:10px;height:10px;border-radius:999px;background:linear-gradient(135deg,var(--brand),var(--accent));box-shadow:0 0 0 6px var(--ring)}

@@ -2,17 +2,20 @@
 
 export type ProjectModalData = {
   title?: string;
+  name?: string;        // alias for title (from config)
   time?: string;
-  description?: string;
+  summary?: string;     // short text (fallback)
+  description?: string; // detailed text
   skills?: string[];
-  links?: { href?: string; label?: string; title?: string; target?: string; icon?: string }[];
-  images?: { src: string; alt?: string }[];
+  links?: { href?: string; label?: string; title?: string; target?: string; icon?: string; type?: string }[];
+  images?: { src: string; alt?: string; caption?: string }[];
 };
 
 export class ProjectModal {
   private currentIndex = 0;
-  private images: { src: string; alt?: string }[] = [];
+  private images: { src: string; alt?: string; caption?: string }[] = [];
   private lastFocus: Element | null = null;
+  private defaultDescription: string = '';
 
   constructor(private modal: HTMLElement) {
     this.init();
@@ -26,9 +29,11 @@ export class ProjectModal {
       descEl: this.modal.querySelector('.modal__desc') as HTMLElement,
       skillsEl: this.modal.querySelector('.modal__skills') as HTMLElement,
       linksEl: this.modal.querySelector('.modal__links') as HTMLElement,
+      viewport: this.modal.querySelector('.gallery__viewport') as HTMLElement,
       track: this.modal.querySelector('.gallery__track') as HTMLElement,
       prevBtn: this.modal.querySelector('.gallery__prev') as HTMLButtonElement,
       nextBtn: this.modal.querySelector('.gallery__next') as HTMLButtonElement,
+      captionEl: this.modal.querySelector('.gallery__caption') as HTMLElement,
       closeBtn: this.modal.querySelector('.modal__close') as HTMLButtonElement
     };
   }
@@ -41,13 +46,22 @@ export class ProjectModal {
     const vis = this.images.length > 1 ? 'visible' : 'hidden';
     this.els.prevBtn.style.visibility = vis;
     this.els.nextBtn.style.visibility = vis;
+    const cap = this.images[this.currentIndex]?.caption || '';
+    if (this.els.captionEl) {
+      this.els.captionEl.textContent = cap;
+      this.els.captionEl.style.display = cap ? 'block' : 'none';
+    }
+    if (this.els.descEl) {
+      this.els.descEl.textContent = cap || this.defaultDescription || '';
+    }
   }
 
   private fillFromData(data: ProjectModalData) {
     const { titleEl, timeEl, descEl, skillsEl, linksEl, track } = this.els;
-    titleEl.textContent = data.title || 'Project';
+    titleEl.textContent = data.title || data.name || 'Project';
     timeEl.textContent = data.time || '';
-    descEl.textContent = data.description || '';
+    this.defaultDescription = data.description || data.summary || '';
+    descEl.textContent = this.defaultDescription;
 
     clearChildren(skillsEl);
     (data.skills || []).forEach((label) => {
@@ -63,6 +77,9 @@ export class ProjectModal {
       link.className = 'link';
       link.href = linkData.href || '#';
       link.title = linkData.title || linkData.label || '';
+      // Auto-icon mapping by type when icon not set
+      const typeIcon: Record<string,string> = { website: 'icons/globe.svg', github: 'icons/github.svg', repo: 'icons/github.svg' };
+      if (!linkData.icon && linkData.type && typeIcon[linkData.type]) linkData.icon = typeIcon[linkData.type];
       if (linkData.target) link.target = linkData.target;
       if (linkData.icon) {
         const icon = document.createElement('img');
@@ -70,20 +87,20 @@ export class ProjectModal {
         icon.setAttribute('draggable', 'false');
         link.appendChild(icon);
       }
-      link.appendChild(document.createTextNode(' ' + (linkData.label || 'Link')));
+      link.appendChild(document.createTextNode(' ' + (linkData.label || (linkData.type ? (linkData.type[0].toUpperCase() + linkData.type.slice(1)) : 'Link'))));
       linksEl.appendChild(link);
     });
 
     this.images = [];
     clearChildren(track);
-    (data.images || []).forEach(({ src, alt }) => {
+    (data.images || []).forEach(({ src, alt, caption }) => {
       if (!src) return;
       const el = document.createElement('img');
       el.className = 'gallery__img';
       el.loading = 'lazy';
       el.src = src; el.alt = alt || '';
       track.appendChild(el);
-      this.images.push({ src, alt });
+      this.images.push({ src, alt, caption });
     });
     this.setGallery(0);
   }
@@ -100,8 +117,10 @@ export class ProjectModal {
     if (p) {
       const pClone = p.cloneNode(true) as HTMLElement;
       pClone.querySelectorAll('a').forEach((a) => a.remove());
-      descEl.textContent = (pClone.textContent || '').trim();
+      this.defaultDescription = (pClone.textContent || '').trim();
+      descEl.textContent = this.defaultDescription;
     } else {
+      this.defaultDescription = '';
       descEl.textContent = '';
     }
 
@@ -138,7 +157,13 @@ export class ProjectModal {
     if (tpl) {
       const frag = tpl.content.cloneNode(true) as DocumentFragment;
       const imgs = frag.querySelectorAll('img');
-      imgs.forEach((im) => { this.images.push({ src: im.getAttribute('src') || '', alt: im.getAttribute('alt') || '' }); });
+      imgs.forEach((im) => {
+        this.images.push({
+          src: im.getAttribute('src') || '',
+          alt: im.getAttribute('alt') || '',
+          caption: im.getAttribute('data-caption') || ''
+        });
+      });
     }
     if (!this.images.length) {
       const im = card.querySelector('img');
@@ -178,9 +203,19 @@ export class ProjectModal {
   }
 
   private init() {
-    const { prevBtn, nextBtn, closeBtn } = this.els;
+    const { prevBtn, nextBtn, closeBtn, viewport } = this.els;
     prevBtn?.addEventListener('click', () => this.setGallery(this.currentIndex - 1));
     nextBtn?.addEventListener('click', () => this.setGallery(this.currentIndex + 1));
+    // Click on left/right side of the image area to navigate
+    viewport?.addEventListener('click', (e) => {
+      const rect = viewport.getBoundingClientRect();
+      const x = (e as MouseEvent).clientX - rect.left;
+      if (x < rect.width / 2) {
+        this.setGallery(this.currentIndex - 1);
+      } else {
+        this.setGallery(this.currentIndex + 1);
+      }
+    });
     closeBtn?.addEventListener('click', () => this.close());
     this.modal.addEventListener('click', (e) => { if (e.target === this.modal) this.close(); });
     document.addEventListener('keydown', (e) => {
@@ -192,6 +227,15 @@ export class ProjectModal {
 
     document.addEventListener('click', (e) => {
       const target = e.target as HTMLElement;
+      // Open when clicking the main project image
+      const img = target && (target.closest('.project-card > img') as HTMLElement | null);
+      if (img) {
+        e.preventDefault();
+        const card = img.closest('.project-card') as HTMLElement | null;
+        if (card) this.openFromCard(card);
+        return;
+      }
+      // Backward compatibility: support historical Details link if present
       const a = target && target.closest('a.details-trigger');
       if (a) {
         e.preventDefault();

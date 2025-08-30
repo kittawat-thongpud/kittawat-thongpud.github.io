@@ -1,20 +1,15 @@
-<!-- Projects section template -->
-<section class="section section--projects" aria-labelledby="proj-title">
-  <div class="section__card stack">
-    <header>
-      <h2 id="proj-title">Projects</h2>
-      <p class="muted">Selected work and links.</p>
-    </header>
+<!-- Projects -->
+<section class="section" aria-labelledby="proj-title">
+  <div class="container">
+    <div class="section-h">
+      <h2 id="proj-title">Selected Projects</h2>
+      <div class="sub">Industrial &amp; Academic</div>
+    </div>
     <div class="stack">
-      <article>
-        <h3>Project Title</h3>
-        <p class="muted">Short description and link.</p>
-      </article>
-      <article>
-        <h3>Another Project</h3>
-        <p class="muted">Short description and link.</p>
-      </article>
+      <h3>Industrial</h3>
+      <div class="project-gallery" data-projects-src="/data/projects.json" data-filter-tag="industrial"></div>
+      <h3>Academic</h3>
+      <div class="project-gallery" data-projects-src="/data/projects.json" data-filter-tag="academic"></div>
     </div>
   </div>
 </section>
-

@@ -9,6 +9,8 @@
   img, picture, svg, canvas, video { display: block; max-width: 100%; }
   input, button, textarea, select { font: inherit; }
   :where(a) { color: inherit; text-decoration: none; }
+  /* Disable text selection globally */
+  :where(*) { -webkit-user-select: none; user-select: none; }
 }
 
 /* Design Tokens */
@@ -16,12 +18,23 @@
   :root {
     /* Palette */
     --color-bg: #0e0f12;
-    --color-surface: #151821;
+    --color-surface-1: #0f141b;
+    --color-surface-2: #151821;
+    --color-surface-3: #1b2030;
+    --color-surface: var(--color-surface-2);
     --color-text: #e7e9ee;
     --color-text-muted: #a8adbb;
     --color-primary: #6ea8fe;
     --color-accent: #7ee787;
     --color-border: #262b3a;
+
+    /* Synonyms for landing.css */
+    --bg: var(--color-bg);
+    --panel: var(--color-surface-2);
+    --line: var(--color-border);
+    --text: var(--color-text);
+    --chip: var(--color-surface-3);
+    --ring: rgba(110,168,254,.25);
 
     /* Typography */
     --font-sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
@@ -53,6 +66,25 @@
     --dur-fast: 180ms;
     --dur: 280ms;
     --ease: cubic-bezier(.22,.61,.36,1);
+  }
+  /* Light theme overrides */
+  .theme-light {
+    --color-bg: #f6f8fb;
+    --color-surface-1: #ffffff;
+    --color-surface-2: #ffffff;
+    --color-surface-3: #f1f5f9;
+    --color-surface: var(--color-surface-2);
+    --color-text: #0e0f12;
+    --color-text-muted: #5f6676;
+    --color-primary: #2b6cb0;
+    --color-accent: #0ea5e9;
+    --color-border: #e5e7eb;
+    --bg: var(--color-bg);
+    --panel: var(--color-surface-2);
+    --line: var(--color-border);
+    --text: var(--color-text);
+    --chip: var(--color-surface-3);
+    --ring: rgba(43,108,176,.25);
   }
 }
 
@@ -133,4 +165,16 @@
   .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
   .stack > * + * { margin-top: var(--space-4); }
   .center { min-height: 100dvh; display: grid; place-items: center; }
+}
+
+@layer tokens {
+  .theme-main {
+    /* Bridge landing.css variables to widgets if needed, and allow future theming */
+    --w-border: var(--line);
+    --w-btn-border: var(--line);
+    --w-btn-bg: linear-gradient(180deg,#101620,#0b111a);
+    --w-chip-bg: color-mix(in oklab, var(--brand) 10%, transparent);
+    --w-chip-ring: var(--ring);
+    --w-chip-color: #d9e6f5;
+  }
 }

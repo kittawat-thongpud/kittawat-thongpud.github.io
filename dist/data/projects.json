@@ -1,13 +1,14 @@
 [
   {
     "title": "Automated Material Transferring System",
-    "time": "2024 – Present",
-    "description": "SIASUN AGV forklift deployment for tire production – eliminated manual forklifts; enabled 24/7 ops.",
+    "time": "2024 - Present",
+    "description": "Commissioned SIASUN AGV forklifts for tire production lines; removed manual forks and achieved round-the-clock operation with safety interlocks.",
     "images": [
-      { "src": "assets/Wow-gif.gif", "alt": "AGV forklift demo frame" },
-      { "src": "assets/Wow-gif.gif", "alt": "Warehouse path planning UI" }
+      { "src": "https://images.unsplash.com/photo-1542601098-8fc114e148e2?q=80&w=1200&auto=format&fit=crop", "alt": "AGV forklift at loading bay", "caption": "AGV docks at the loading bay with pallet detection." },
+      { "src": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1200&auto=format&fit=crop", "alt": "Path planning UI", "caption": "Live path planning and traffic control dashboard." }
     ],
     "skills": ["ROS 2", "SLAM", "Sensor Fusion"],
+    "tags": ["industrial", "ros2", "slam", "sensor fusion"],
     "links": [
       { "label": "Website", "href": "#", "icon": "icons/globe.svg" },
       { "label": "GitHub", "href": "#", "icon": "icons/github.svg" }
@@ -15,12 +16,14 @@
   },
   {
     "title": "Automated Tote AS/RS",
-    "time": "2023 – 2024",
-    "description": "Hairobot AGV‑Base AS/RS with ERP integration for real-time inventory management.",
+    "time": "2023 - 2024",
+    "description": "Designed and integrated a Hairobot-based tote AS/RS with ERP hooks for real-time stock, lot tracking and cycle count automation.",
     "images": [
-      { "src": "assets/Wow-gif.gif", "alt": "AS/RS tote conveyor" }
+      { "src": "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?q=80&w=1200&auto=format&fit=crop", "alt": "AS/RS tote shuttles", "caption": "Tote shuttle moving through the rack aisles." },
+      { "src": "https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1200&auto=format&fit=crop", "alt": "ERP integration screen", "caption": "ERP integration page for inbound/outbound transactions." }
     ],
     "skills": ["ERP", "AS/RS", "AGV"],
+    "tags": ["industrial", "as/rs", "agv"],
     "links": [
       { "label": "Website", "href": "#", "icon": "icons/globe.svg" },
       { "label": "GitHub", "href": "#", "icon": "icons/github.svg" }
@@ -28,17 +31,18 @@
   },
   {
     "title": "ROS 2 AMR Prototype",
-    "time": "2022 – 2023",
-    "description": "Prototype AMR with ROS2 control stack, basic navigation, and vision‑assisted docking.",
+    "time": "2022 - 2023",
+    "description": "Built a ROS 2 controlled AMR prototype featuring differential drive, sensor fusion, and docking using vision markers.",
     "images": [
-      { "src": "assets/Wow-gif.gif", "alt": "AMR sim in Gazebo" },
-      { "src": "assets/Wow-gif.gif", "alt": "ROS2 rqt graph" }
+      { "src": "https://images.unsplash.com/photo-1649972904349-c353a024686b?q=80&w=1200&auto=format&fit=crop", "alt": "Gazebo simulation", "caption": "Gazebo world with laser scans and TF frames." },
+      { "src": "https://images.unsplash.com/photo-1555255707-c07966088b7b?q=80&w=1200&auto=format&fit=crop", "alt": "ROS 2 graph", "caption": "RQT graph showing navigation stack nodes." },
+      { "src": "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop", "alt": "Camera-based docking", "caption": "ArUco-assisted docking workflow." }
     ],
     "skills": ["ROS 2", "Gazebo", "OpenCV"],
+    "tags": ["academic", "ros2", "navigation"],
     "links": [
       { "label": "Website", "href": "#", "icon": "icons/globe.svg" },
       { "label": "GitHub", "href": "#", "icon": "icons/github.svg" }
     ]
   }
 ]
-

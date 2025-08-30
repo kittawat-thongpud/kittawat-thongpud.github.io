@@ -1,4 +1,4 @@
-/* Landing page styles organized into cascade layers */
+﻿/* Landing page styles organized into cascade layers */
 @layer tokens {
   :root{
     /* Additional palette for landing template */
@@ -17,13 +17,7 @@
 
 @layer base {
   html{scroll-behavior:smooth}
-  body{
-    background:radial-gradient(1200px 600px at 20% -10%, #0f2030 0%, rgba(11,15,20,0) 65%),
-              radial-gradient(1200px 600px at 120% 10%, #101a28 0%, rgba(11,15,20,0) 55%),
-              var(--bg);
-    color:var(--text);
-    font-family: Inter, var(--font-sans, ui-sans-serif), system-ui, Segoe UI, Roboto, Ubuntu, Arial, sans-serif;
-  }
+  /* Background is controlled by root (index.css). Keep links consistent. */
   a{color:inherit;text-decoration:none}
 }
 
@@ -48,9 +42,7 @@
   h1{font-size:clamp(1.8rem,3.4vw,3rem);line-height:1.1;margin:.6rem 0 1rem}
   .lead{color:#c7d6e6;font-size:1.05rem}
   .hero-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:22px}
-  .card{background:linear-gradient(180deg,#0f141b,#0c1219);border:1px solid var(--line);border-radius:16px;padding:16px}
-  .kpi{font-weight:800;font-size:1.25rem}
-  .kpi small{display:block;color:var(--muted);font-weight:600;margin-top:4px}
+  /* Card surfaces are provided by widgets layer (styles/widgets.css). */
   .portrait{aspect-ratio:4/3;border-radius:18px;border:1px solid var(--line);background:linear-gradient(135deg,#0c121a,#121b26);position:relative;overflow:hidden}
   .portrait .glow{position:absolute;inset:0;background:radial-gradient(400px 200px at 70% 30%, rgba(79,209,197,.25), transparent 60%),
       radial-gradient(500px 260px at 10% 80%, rgba(122,162,247,.2), transparent 60%)}
@@ -80,95 +72,12 @@
   /* CHIPS */
   .chips{display:flex;gap:8px;flex-wrap:wrap}
   .chip{background:linear-gradient(180deg,#0e1620,#0a1118);border:1px solid var(--line);padding:6px 10px;border-radius:999px;font-weight:600;color:#cfe2f3}
+  /* Nav hide/show on scroll */
+  nav { transition: transform .24s var(--ease, cubic-bezier(.22,.61,.36,1)); }
+  nav.nav--hidden { transform: translateY(-100%); }
 
-  /* FOOTER */
+  
   footer{padding:28px 0;color:var(--muted)}
   .muted{color:var(--muted)}
 
-  /* PROJECT CARD COMPONENT (technique integration) */
-  .project-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-  @media (max-width:960px){.project-gallery{grid-template-columns:repeat(2,1fr)}}
-  @media (max-width:640px){.project-gallery{grid-template-columns:1fr}}
-
-  .project-card{
-    /* Customizable API */
-    --width: 304px;
-    --height: 365px;
-    --text-font-scale: 1;
-    --text-color-dark: #0b0f14;
-
-    display:flex;flex-direction:column;gap:10px;
-    width:100%;
-    background:linear-gradient(180deg,#0f141b,#0c1219);
-    border:1px solid var(--line);
-    border-radius:16px;
-    padding:12px;
-    box-shadow:0 6px 20px rgba(0,0,0,.25);
-    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-  }
-  .project-card:hover{transform:translateY(-2px);border-color:#2a3a4e}
-  .project-card img{
-    user-drag:none; -webkit-user-drag:none; user-select:none;
-    border-radius:12px; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover;
-    background:linear-gradient(135deg,#0c121a,#121b26);
-    border:1px solid var(--line);
-  }
-  .project-card .description h3{font-size:calc(1.05rem * var(--text-font-scale)); margin:.1rem 0}
-  .project-card .description time{display:block;color:var(--muted);font-weight:600;font-size:.9rem}
-  .project-card .description p{color:#c7d6e6; font-size:calc(1rem * var(--text-font-scale));}
-  .project-card .description a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
-
-  .skill-list{display:flex;gap:8px;flex-wrap:wrap}
-  .skill-list .item{
-    border:1px solid var(--line);
-    background:var(--chip);
-    padding:6px 10px; border-radius:999px; font-weight:600; color:#cfe2f3;
-  }
-  .card-footer{display:flex;gap:10px;flex-wrap:wrap}
-  .card-footer .link{
-    display:inline-flex;align-items:center;gap:8px;
-    border:1px solid var(--line);
-    padding:8px 10px; border-radius:12px; background:linear-gradient(180deg,#101620,#0b111a);
-    cursor:pointer; user-select:none;
-  }
-  .card-footer .link:hover{border-color:#2a3a4e}
-  .card-footer .link img{width:16px;height:16px;display:block;filter:contrast(1.2)}
-
-  .no-copy{user-select:none}
-  .no-blinking-curser{caret-color:transparent}
-
-  /* MODAL (Project detail) */
-  .modal[hidden]{display:none}
-  .modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:20px;
-    background:color-mix(in oklab, black 62%, transparent);
-    backdrop-filter:saturate(140%) blur(8px);
-  }
-  body.modal-open{overflow:hidden}
-  /* Make modal dialog visually match .project-card surface */
-  .modal__dialog{width:min(960px, 96vw);max-height:92vh;overflow:hidden;display:grid;grid-template-rows:auto 1fr;
-    background:linear-gradient(180deg,#0f141b,#0c1219);
-    border:1px solid var(--line);border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.45);
-    --text-font-scale: 1; /* same variable API as .project-card */
-  }
-  .modal__header{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid var(--line)}
-  .modal__header h3{font-size:calc(1.15rem * var(--text-font-scale));margin:0}
-  .modal__close{appearance:none;border:1px solid var(--line);border-radius:10px;background:linear-gradient(180deg,#101620,#0b111a);color:var(--text);
-    padding:6px 10px;cursor:pointer}
-  .modal__close:hover{border-color:#2a3a4e}
-  .modal__body{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;padding:14px;overflow:auto}
-  @media (max-width:880px){.modal__body{grid-template-columns:1fr}}
-
-  .modal__gallery{position:relative}
-  .gallery__viewport{overflow:hidden;border:1px solid var(--line);border-radius:12px}
-  .gallery__track{display:flex;transition:transform .28s var(--ease, cubic-bezier(.22,.61,.36,1));will-change:transform}
-  .gallery__img{flex:0 0 100%;aspect-ratio:4/3;object-fit:cover;background:#0c1219}
-  .gallery__nav{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;pointer-events:none}
-  .gallery__btn{pointer-events:auto;appearance:none;border:1px solid var(--line);border-radius:999px;width:36px;height:36px;
-    display:grid;place-items:center;background:linear-gradient(180deg,#101620,#0b111a);color:var(--text);cursor:pointer}
-  .gallery__btn:hover{border-color:#2a3a4e}
-
-  .modal__content{display:grid;gap:10px}
-  .modal__time{color:var(--muted);font-weight:600}
-  .modal__desc{color:#c7d6e6; font-size:calc(1rem * var(--text-font-scale));}
-  .modal__skills .item{background:var(--chip)}
 }
