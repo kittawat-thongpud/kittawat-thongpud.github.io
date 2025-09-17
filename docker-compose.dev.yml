@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: docker/dev.Dockerfile
+    container_name: vite_tailwind_dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true  # ทำให้ watch ไฟล์บนบาง OS/FS เสถียรขึ้น
+    command: npm run dev -- --host

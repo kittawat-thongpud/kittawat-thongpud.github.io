@@ -1,0 +1,65 @@
+{
+  "name": "vitenodeeditor",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": { 
+    "dev": "vite",
+    "dev:host": "vite --host",
+    "preview": "vite preview --port 4173 --strictPort",
+    "build": "tsc -b && vite build",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --ext .ts,.tsx",
+    "format": "prettier --write .",
+
+    "analyze": "npx vite-bundle-visualizer",
+    "clean": "rimraf dist .turbo .parcel-cache .cache && rimraf build-js",
+
+    "ts:emit": "tsc -p tsconfig.build.json --outDir build-js",
+
+    "docker:dev:build": "docker compose -f docker-compose.dev.yml build",
+    "docker:dev:up": "docker compose -f docker-compose.dev.yml up --build",
+    "docker:dev:up:d": "docker compose -f docker-compose.dev.yml up --build -d",
+    "docker:dev:down": "docker compose -f docker-compose.dev.yml down",
+    "docker:dev:logs": "docker compose -f docker-compose.dev.yml logs -f --tail=200",
+    "docker:dev:sh": "docker exec -it vite_tailwind_v4_dev sh",
+
+    "docker:prod:build": "docker compose -f docker-compose.prod.yml build",
+    "docker:prod:up": "docker compose -f docker-compose.prod.yml up --build -d",
+    "docker:prod:down": "docker compose -f docker-compose.prod.yml down",
+    "docker:prod:logs": "docker compose -f docker-compose.prod.yml logs -f --tail=200",
+    "docker:prod:sh": "docker exec -it vite_tailwind_v4_prod sh",
+
+    "docker:ps": "docker ps --format 'table {{.Names}}\\t{{.Status}}\\t{{.Ports}}'",
+    "docker:stats": "docker stats --no-stream",
+    "docker:top:dev": "docker top vite_tailwind_v4_dev || true",
+    "docker:top:prod": "docker top vite_tailwind_v4_prod || true",
+    "docker:prune": "docker system prune -f --volumes",
+
+    "health:dev": "npx http-server ./ -p 0 >/dev/null 2>&1 || exit 0 && curl -fsS http://localhost:5173 || exit 1",
+    "port:kill": "kill-port 5173 4173",
+    "open:dev": "npx open-cli http://localhost:5173",
+    "open:prod": "npx open-cli http://localhost:8080"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.13",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.33.0",
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7",
+    "@vitejs/plugin-react-swc": "^4.0.0",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9.33.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.3.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.13",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.39.1",
+    "vite": "^7.1.2"
+  }
+}
